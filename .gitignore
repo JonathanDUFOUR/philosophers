@@ -1,0 +1,10 @@
+**
+!**/
+!*.h
+!*.c
+!*.sh
+!*.mk
+!*.pdf
+!Makefile
+!.gitignore
+!notes.txt

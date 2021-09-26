@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 02:18:32 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/14 18:03:13 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/09/26 20:47:42 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int	phi_run(void)
 		return (MALLOC_ERR);
 	fork = malloc(nb_philo * sizeof(t_fork));
 	if (!fork)
+	{
+		phi_memdel(&philo);
 		return (MALLOC_ERR);
+	}
 	phi_philo_init(philo, fork);
 	ret = phi_philo_born(philo);
 	i = 0;

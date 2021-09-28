@@ -2,9 +2,7 @@
 !**/
 !*.h
 !*.c
-!*.sh
 !*.mk
-!*.pdf
+!en.subject.pdf
 !Makefile
 !.gitignore
-!notes.txt

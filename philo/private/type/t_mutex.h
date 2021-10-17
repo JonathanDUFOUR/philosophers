@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.h                                           :+:      :+:    :+:   */
+/*   t_fork.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/10 13:58:08 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/10 14:09:36 by jodufour         ###   ########.fr       */
+/*   Created: 2021/09/13 18:05:26 by jodufour          #+#    #+#             */
+/*   Updated: 2021/10/15 20:38:04 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLORS_H
-# define COLORS_H
+#ifndef T_MUTEX_H
+# define T_MUTEX_H
 
-# define RED "\e[31m"
-# define WHITE "\e[0m"
+# include <pthread.h>
+
+typedef pthread_mutex_t	t_mutex;
 
 #endif

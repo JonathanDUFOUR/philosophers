@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phi_philo_init.c                                   :+:      :+:    :+:   */
+/*   phi_philo_stop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/12 12:34:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/16 01:22:52 by jodufour         ###   ########.fr       */
+/*   Created: 2021/10/16 22:51:38 by jodufour          #+#    #+#             */
+/*   Updated: 2021/10/17 09:55:07 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdlib.h>
 #include "type/t_ctx.h"
 #include "type/t_philo.h"
 #include "enum/e_state.h"
+#include "enum/e_ret.h"
 
-void	phi_philo_init(t_philo *philo, t_fork *fork)
+int	phi_philo_stop(t_philo *philo)
 {
-	t_uint const	nb_philo = phi_ctx_get()->nb_philo;
-	t_uint			i;
+	t_ctx *const	ctx = phi_ctx_get();
+	t_lint			i;
 
+	if (pthread_mutex_lock(&ctx->access))
+		return (MUTEX_LOCK_ERR);
 	i = 0;
-	while (i < nb_philo)
+	while (i < ctx->nb_philo)
 	{
-		pthread_mutex_init(fork + i, NULL);
-		philo[i].idx = i + 1;
-		philo[i].meal_count = 0;
-		philo[i].last_meal = 0;
-		philo[i].state = THINKING;
-		philo[i].fork_right = fork + i;
-		if (i)
-			philo[i].fork_left = fork + i - 1;
-		else
-			philo[i].fork_left = fork + nb_philo - 1;
+		if (pthread_mutex_lock(&philo[i].access))
+			return (MUTEX_LOCK_ERR);
+		if (philo[i].state != DEAD)
+			philo[i].state = STOP;
+		if (pthread_mutex_unlock(&philo[i].access))
+			return (MUTEX_UNLOCK_ERR);
 		++i;
 	}
+	if (pthread_mutex_unlock(&ctx->access))
+		return (MUTEX_UNLOCK_ERR);
+	return (SUCCESS);
 }

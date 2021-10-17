@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 12:04:38 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/12 12:05:43 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/16 22:39:55 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ enum	e_state
 	EATING,
 	SLEEPING,
 	THINKING,
-	DEAD
+	DEAD,
+	STOP
 };
 
 #endif

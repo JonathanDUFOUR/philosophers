@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 11:53:51 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/20 22:28:07 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/17 23:15:21 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,37 @@
 #include "state_msg_lookup.h"
 #include "enum/e_ret.h"
 
-int	phi_philo_state_msg(t_philo *philo)
+static char const	*state_msg_get(int state)
 {
-	t_hhuint const	state = philo->state;
-	t_voice *const	voice = phi_voice_get();
-	t_lint const	start = phi_ctx_get()->start;
-	t_lint const	now = phi_now();
-	int				i;
+	int	i;
 
-	if (now == -1)
-		return (GET_TIME_OF_DAY_ERR);
-	if (pthread_mutex_lock(voice))
-		return (MUTEX_LOCK_ERR);
 	i = 0;
 	while (g_state_msg[i].msg && state != g_state_msg[i].state)
 		++i;
-	if (phi_ctx_get()->required_meals)
-		printf("%6li %u %s\n", now - start, philo->idx, g_state_msg[i].msg);
-	if (state == DEAD)
-		phi_ctx_get()->required_meals = 0;
-	if (pthread_mutex_unlock(voice))
+	return (g_state_msg[i].msg);
+}
+
+int	phi_philo_state_msg(t_philo *philo)
+{
+	t_ctx *const	ctx = phi_ctx_get();
+	char const		*msg;
+	t_huint			idx;
+	t_lint			now;
+
+	if (pthread_mutex_lock(&philo->access))
+		return (MUTEX_LOCK_ERR);
+	idx = philo->idx;
+	msg = state_msg_get(philo->state);
+	if (pthread_mutex_unlock(&philo->access))
+		return (MUTEX_UNLOCK_ERR);
+	if (pthread_mutex_lock(&ctx->access))
+		return (MUTEX_LOCK_ERR);
+	now = phi_now();
+	if (now == -1)
+		return (GET_TIME_OF_DAY_ERR);
+	if (msg)
+		printf("%6li %hu %s\n", now - ctx->start, idx, msg);
+	if (pthread_mutex_unlock(&ctx->access))
 		return (MUTEX_UNLOCK_ERR);
 	return (SUCCESS);
 }

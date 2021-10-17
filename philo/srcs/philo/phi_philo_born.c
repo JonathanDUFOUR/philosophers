@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 18:44:46 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/21 03:17:32 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/15 20:25:47 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include "type/t_philo.h"
 #include "enum/e_ret.h"
 
-int	phi_philo_born(t_philo *philo)
+int	phi_philo_born(t_philo *const philo)
 {
 	t_ctx *const	ctx = phi_ctx_get();
-	t_lint const	nb_philo = phi_ctx_get()->nb_philo;
+	t_lint const	nb_philo = ctx->nb_philo;
 	t_lint			i;
 
 	ctx->start = phi_now();

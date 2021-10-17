@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/08 23:18:36 by jodufour          #+#    #+#              #
-#    Updated: 2021/09/21 08:10:15 by jodufour         ###   ########.fr        #
+#    Updated: 2021/10/17 23:51:30 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,11 @@ SRC		=	\
 				phi_philo_born.c				\
 				phi_philo_eat.c					\
 				phi_philo_init.c				\
+				phi_philo_manage.c				\
 				phi_philo_sleep.c				\
 				phi_philo_state_msg.c			\
+				phi_philo_stop.c				\
+				phi_philo_suicide.c				\
 				phi_philo_think.c				\
 				phi_philo_wait.c				\
 			}									\
@@ -70,7 +73,7 @@ SRC		=	\
 			phi_limits_check.c					\
 			phi_now.c							\
 			phi_routine.c						\
-			phi_run.c
+			phi_run.c							\
 
 ######################################
 #            OBJECT FILES            #
@@ -83,7 +86,7 @@ DEP		=	${OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra #-Werror
 CFLAGS	+=	-MMD -MP
 CFLAGS	+=	-I${PRV_DIR}
 
@@ -91,6 +94,10 @@ LDFLAGS	=	-lpthread
 
 ifeq (${DEBUG}, 1)
 	CFLAGS	+=	-g
+else \
+ifeq (${DEBUG}, 2)
+	CFLAGS	+=	-g3 -fsanitize=address
+	LDFLAGS	+=	-fsanitize=address
 endif
 
 #######################################
@@ -115,25 +122,7 @@ fclean:
 
 re:	fclean all
 
-coffee:
-	@echo '                                              '
-	@echo '                   "   "                      '
-	@echo '                  " " " "                     '
-	@echo '                 " " " "                      '
-	@echo '         _.-==="-"""""-"===-._                '
-	@echo '        |=___   "~"~"~"   ___=|=,.            '
-	@echo '        |    """======="""    |  \\           '
-	@echo '        |                     |   ||          '
-	@echo '        |                     |   ||          '
-	@echo '        |                     |   ||          '
-	@echo '        |                     |   ||          '
-	@echo '        |                     |  //           '
-	@echo '         \                   /=="`            '
-	@echo '          \                 /                 '
-	@echo '           `"--._______.--"`                  '
-	@echo '                                              '
-
-norm:
-	@norminette ${SRC_DIR} ${PRV_DIR} | grep 'Error' ; true
+-include /home/jodufour/Templates/mk_files/coffee.mk
+-include /home/jodufour/Templates/mk_files/norm.mk
 
 .PHONY:	all clean fclean re coffee norm

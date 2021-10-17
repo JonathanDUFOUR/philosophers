@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 12:34:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/16 01:22:52 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/16 09:05:41 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@
 #include "type/t_philo.h"
 #include "enum/e_state.h"
 
-void	phi_philo_init(t_philo *philo, t_fork *fork)
+void	phi_philo_init(t_philo *philo, t_mutex *fork)
 {
 	t_uint const	nb_philo = phi_ctx_get()->nb_philo;
 	t_uint			i;
 
 	i = 0;
 	while (i < nb_philo)
+		pthread_mutex_init(fork + i++, NULL);
+	i = 0;
+	while (i < nb_philo)
 	{
-		pthread_mutex_init(fork + i, NULL);
 		philo[i].idx = i + 1;
 		philo[i].meal_count = 0;
 		philo[i].last_meal = 0;
@@ -34,6 +36,7 @@ void	phi_philo_init(t_philo *philo, t_fork *fork)
 			philo[i].fork_left = fork + i - 1;
 		else
 			philo[i].fork_left = fork + nb_philo - 1;
+		pthread_mutex_init(&philo[i].access, NULL);
 		++i;
 	}
 }

@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phi_routine.c                                      :+:      :+:    :+:   */
+/*   phi_manager_born.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 20:21:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/15 20:34:04 by jodufour         ###   ########.fr       */
+/*   Created: 2021/10/19 15:58:55 by jodufour          #+#    #+#             */
+/*   Updated: 2021/10/24 00:42:45 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "type/t_philo.h"
+#include "type/t_manager.h"
 #include "enum/e_ret.h"
 
-void	*phi_routine(void *param)
+int	phi_manager_born(t_philo *philo, int *const ret)
 {
-	t_philo *const	philo = (t_philo *)param;
-	int				ret;
-	int				i;
+	t_manager *const	manager = phi_manager_get();
 
-	i = 0;
-	while (i < 30)
-	{
-		ret = phi_philo_eat(philo);
-		if (ret == SUCCESS)
-			ret = phi_philo_sleep(philo);
-		if (ret == SUCCESS)
-			ret = phi_philo_think(philo);
-		++i;
-	}
-	return (NULL);
+	if (pthread_create(&manager->thread, NULL, phi_manager_routine, manager))
+		return (*ret = PTHREAD_CREATE_ERR);
+	if (phi_philo_born(philo, ret))
+		return (*ret);
+	return (*ret = SUCCESS);
 }

@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_voice.h                                          :+:      :+:    :+:   */
+/*   phi_manager_init.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 20:10:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/13 20:14:19 by jodufour         ###   ########.fr       */
+/*   Created: 2021/10/19 16:26:41 by jodufour          #+#    #+#             */
+/*   Updated: 2021/10/19 16:44:52 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_VOICE_H
-# define T_VOICE_H
+#include "type/t_manager.h"
 
-# include <pthread.h>
+void	phi_manager_init(t_philo *philo, t_mutex *fork)
+{
+	t_manager *const	manager = phi_manager_get();
 
-typedef pthread_mutex_t	t_voice;
-
-t_voice	*phi_voice_get(void);
-
-#endif
+	manager->philo = philo;
+	phi_philo_init(philo, fork);
+}

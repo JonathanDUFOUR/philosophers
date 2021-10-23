@@ -1,43 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phi_philo_think.c                                  :+:      :+:    :+:   */
+/*   phi_manager_routine.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/14 18:43:10 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 00:32:38 by jodufour         ###   ########.fr       */
+/*   Created: 2021/10/15 20:57:46 by jodufour          #+#    #+#             */
+/*   Updated: 2021/10/24 00:56:01 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "philosophers.h"
 #include "type/t_ctx.h"
-#include "type/t_philo.h"
-#include "enum/e_ret.h"
+#include "type/t_manager.h"
 #include "enum/e_state.h"
+#include "enum/e_ret.h"
 
-int	phi_philo_think(t_philo *const philo, int *const ret)
+static int	start_signal(int *const ret)
 {
 	t_ctx *const	ctx = phi_ctx_get();
-	t_lint			time_to_eat;
-	t_lint			time_to_sleep;
 
-	if (pthread_mutex_lock(&philo->access))
-		return (*ret = MUTEX_LOCK_ERR);
-	if (philo->state == SLEEPING)
-		philo->state = THINKING;
-	if (pthread_mutex_unlock(&philo->access))
-		return (*ret = MUTEX_UNLOCK_ERR);
-	if (phi_philo_state_msg(philo, ret))
-		return (*ret);
 	if (pthread_mutex_lock(&ctx->access))
 		return (*ret = MUTEX_LOCK_ERR);
-	time_to_eat = ctx->time_to_eat;
-	time_to_sleep = ctx->time_to_sleep;
 	if (pthread_mutex_unlock(&ctx->access))
 		return (*ret = MUTEX_UNLOCK_ERR);
-	if (time_to_eat > time_to_sleep
-		&& phi_philo_wait(philo, time_to_eat - time_to_sleep, ret))
-		return (*ret);
 	return (*ret = SUCCESS);
+}
+
+static void	*quit(int const ret)
+{
+	if (ret != SUCCESS)
+		phi_err_msg(ret);
+	return (NULL);
+}
+
+void	*phi_manager_routine(void *param)
+{
+	t_manager *const	manager = (t_manager *)param;
+	int					ret;
+
+	if (start_signal(&ret))
+		return (quit(ret));
+	while (1)
+	{
+		if (usleep(100) == -1)
+			return (quit(USLEEP_ERR));
+		if (phi_manager_kill(manager->philo, &ret) != SIMULATION_RUN)
+			break ;
+	}
+	if (ret == SIMULATION_STOP && phi_manager_stop(manager->philo, &ret))
+		return (quit(ret));
+	return (quit(SUCCESS));
 }

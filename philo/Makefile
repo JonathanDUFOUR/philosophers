@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/08 23:18:36 by jodufour          #+#    #+#              #
-#    Updated: 2021/10/17 23:51:30 by jodufour         ###   ########.fr        #
+#    Updated: 2021/10/24 00:53:46 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,14 +44,21 @@ SRC		=	\
 				phi_ctx_init.c					\
 				phi_ctx_print.c					\
 			}									\
+			${addprefix manager/,				\
+				phi_manager_born.c				\
+				phi_manager_get.c				\
+				phi_manager_init.c				\
+				phi_manager_kill.c				\
+				phi_manager_routine.c			\
+				phi_manager_stop.c				\
+			}									\
 			${addprefix philo/,					\
 				phi_philo_born.c				\
 				phi_philo_eat.c					\
 				phi_philo_init.c				\
-				phi_philo_manage.c				\
+				phi_philo_routine.c				\
 				phi_philo_sleep.c				\
 				phi_philo_state_msg.c			\
-				phi_philo_stop.c				\
 				phi_philo_suicide.c				\
 				phi_philo_think.c				\
 				phi_philo_wait.c				\
@@ -72,7 +79,6 @@ SRC		=	\
 			phi_format_check.c					\
 			phi_limits_check.c					\
 			phi_now.c							\
-			phi_routine.c						\
 			phi_run.c							\
 
 ######################################

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:59:18 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/15 18:01:10 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/21 15:01:22 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ static const t_err_msg		g_err_msg[] = {
 	{FORMAT_ERR, "Wrong argument(s) format"},
 	{LIMITS_ERR, "Input is over LONG_INT_MAX value"},
 	{MALLOC_ERR, "malloc() failed"},
-	{PTHREAD_CREATE_ERR, "pthread_create() failed"},
-	{GET_TIME_OF_DAY_ERR, "gettimeofday() failed"},
 	{USLEEP_ERR, "usleep() failed"},
+	{PRINTF_ERR, "printf() failed"},
 	{MUTEX_LOCK_ERR, "pthread_mutex_lock() failed"},
 	{MUTEX_UNLOCK_ERR, "pthread_mutex_unlock() failed"},
+	{PTHREAD_JOIN_ERR, "pthread_join() failed"},
+	{PTHREAD_CREATE_ERR, "pthread_create() failed"},
+	{GET_TIME_OF_DAY_ERR, "gettimeofday() failed"},
 	{0, NULL}
 };
 

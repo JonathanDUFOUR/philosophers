@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 20:21:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 01:03:37 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 02:53:50 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,59 @@
 #include "enum/e_state.h"
 #include "enum/e_ret.h"
 
-static int	start_signal(int *const ret)
+static int	get_idx(
+	t_philo *const philo,
+	t_huint *const idx,
+	int *const ret)
 {
-	t_ctx *const	ctx = phi_ctx_get();
-
-	if (pthread_mutex_lock(&ctx->access))
+	if (pthread_mutex_lock(&philo->access))
 		return (*ret = MUTEX_LOCK_ERR);
-	if (pthread_mutex_unlock(&ctx->access))
+	*idx = philo->idx;
+	if (pthread_mutex_unlock(&philo->access))
 		return (*ret = MUTEX_UNLOCK_ERR);
 	return (*ret = SUCCESS);
 }
 
-static int	get_state(t_philo *const philo, t_hhuint *state, int *const ret)
+static int	get_state(
+	t_philo *const philo,
+	t_hhuint *const state,
+	int *const ret)
 {
 	if (pthread_mutex_lock(&philo->access))
 		return (*ret = MUTEX_LOCK_ERR);
 	*state = philo->state;
 	if (pthread_mutex_unlock(&philo->access))
 		return (*ret = MUTEX_UNLOCK_ERR);
+	return (*ret = SUCCESS);
+}
+
+static int	start_signal(
+	t_philo *const philo,
+	int *const ret)
+{
+	t_ctx *const	ctx = phi_ctx_get();
+	t_lint			time_to_eat;
+	t_lint			nb_philo;
+	t_huint			idx;
+
+	if (get_idx(philo, &idx, ret))
+		return (*ret);
+	if (pthread_mutex_lock(&ctx->access))
+		return (*ret = MUTEX_LOCK_ERR);
+	time_to_eat = ctx->time_to_eat;
+	nb_philo = ctx->nb_philo;
+	if (pthread_mutex_unlock(&ctx->access))
+		return (*ret = MUTEX_UNLOCK_ERR);
+	if (nb_philo % 2)
+	{
+		if ((idx - 1) % 3)
+			return (phi_philo_wait(philo, ((idx - 1) % 3) * time_to_eat, ret));
+	}
+	else
+	{
+		if ((idx - 1) % 2)
+			return (phi_philo_wait(philo, ((idx - 1) % 2) * time_to_eat, ret));
+	}
 	return (*ret = SUCCESS);
 }
 
@@ -51,7 +86,7 @@ void	*phi_philo_routine(void *param)
 	t_hhuint		state;
 	int				ret;
 
-	if (start_signal(&ret))
+	if (start_signal(philo, &ret))
 		return (quit(ret));
 	if (get_state(philo, &state, &ret))
 		return (quit(ret));

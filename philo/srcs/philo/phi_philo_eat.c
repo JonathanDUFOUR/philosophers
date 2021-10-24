@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:39:51 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 00:12:35 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 01:16:18 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int	lock_forks(
 		return (*ret = MUTEX_UNLOCK_ERR);
 	if (phi_philo_state_msg(philo, ret))
 		return (*ret);
-	if (fork0 == fork1 && phi_philo_suicide(philo, ret))
-		return (*ret);
+	if (fork0 == fork1)
+		return (phi_philo_suicide(philo, ret));
 	if (pthread_mutex_lock(fork1))
 		return (*ret = MUTEX_LOCK_ERR);
 	if (phi_philo_state_msg(philo, ret))

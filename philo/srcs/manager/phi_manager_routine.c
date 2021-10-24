@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 20:57:46 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 00:56:01 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 01:33:14 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,10 @@ void	*phi_manager_routine(void *param)
 
 	if (start_signal(&ret))
 		return (quit(ret));
-	while (1)
-	{
+	while (phi_manager_kill(manager->philo, &ret) == SIMULATION_RUN)
 		if (usleep(100) == -1)
 			return (quit(USLEEP_ERR));
-		if (phi_manager_kill(manager->philo, &ret) != SIMULATION_RUN)
-			break ;
-	}
-	if (ret == SIMULATION_STOP && phi_manager_stop(manager->philo, &ret))
-		return (quit(ret));
-	return (quit(SUCCESS));
+	if (ret == SIMULATION_STOP)
+		phi_manager_stop(manager->philo, &ret);
+	return (quit(ret));
 }

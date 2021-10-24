@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/08 23:18:36 by jodufour          #+#    #+#              #
-#    Updated: 2021/10/24 03:08:03 by jodufour         ###   ########.fr        #
+#    Updated: 2021/10/24 16:24:10 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ PRV_DIR	=	private/
 ######################################
 SRC		=	\
 			${addprefix ctx/,					\
+				phi_ctx_clear.c					\
 				phi_ctx_get.c					\
 				phi_ctx_init_nb_philo.c			\
 				phi_ctx_init_required_meals.c	\
@@ -53,6 +54,7 @@ SRC		=	\
 			}									\
 			${addprefix philo/,					\
 				phi_philo_born.c				\
+				phi_philo_clear.c				\
 				phi_philo_eat.c					\
 				phi_philo_init.c				\
 				phi_philo_routine.c				\
@@ -72,6 +74,7 @@ SRC		=	\
 				phi_strlen.c					\
 			}									\
 			${addprefix voice/,					\
+				phi_voice_clear.c				\
 				phi_voice_get.c					\
 			}									\
 			main.c								\
@@ -96,15 +99,19 @@ CFLAGS	=	-Wall -Wextra #-Werror
 CFLAGS	+=	-MMD -MP
 CFLAGS	+=	-I${PRV_DIR}
 
-LDFLAGS	=	-lpthread
-
 ifeq (${DEBUG}, 1)
 	CFLAGS	+=	-g
 else \
 ifeq (${DEBUG}, 2)
 	CFLAGS	+=	-g3 -fsanitize=address
-	LDFLAGS	+=	-fsanitize=address
+	LDFLAGS	=	-lasan
+else \
+ifeq (${DEBUG}, 3)
+	CFLAGS	+=	-g3 -fsanitize=thread
+	LDFLAGS	=	-ltsan
 endif
+
+LDFLAGS	+=	-lpthread
 
 #######################################
 #                RULES                #

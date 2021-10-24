@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 18:44:46 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 00:12:15 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 17:17:21 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	phi_philo_born(t_philo *philo, int *const ret)
 	i = 0;
 	while (i < nb_philo)
 	{
-		if (phi_now(&philo[i].last_meal))
+		if (phi_now(&philo->last_meal))
 			return (*ret = GET_TIME_OF_DAY_ERR);
-		if (pthread_create(&philo[i].thread, NULL, phi_philo_routine,
-				philo + i))
+		if (pthread_create(&philo->thread, NULL, phi_philo_routine, philo))
 			return (*ret = PTHREAD_CREATE_ERR);
+		++philo;
 		++i;
 	}
 	return (*ret = SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 02:18:32 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 00:42:11 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 15:46:37 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ int	phi_run(void)
 		return (clean_quit(philo, fork, ret));
 	if (pthread_mutex_unlock(&ctx->access))
 		return (clean_quit(philo, fork, MUTEX_UNLOCK_ERR));
-	if (join_all(philo, nb_philo, &ret))
+	if (join_all(philo, nb_philo, &ret)
+		|| phi_voice_clear(&ret)
+		|| phi_philo_clear(philo, &ret)
+		|| phi_ctx_clear(&ret))
 		return (clean_quit(philo, fork, ret));
 	return (clean_quit(philo, fork, SUCCESS));
 }

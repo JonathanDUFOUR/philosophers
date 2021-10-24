@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 10:20:29 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 03:24:53 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 14:52:35 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ struct s_philo
 };
 
 int		phi_philo_born(t_philo *philo, int *const ret);
+int		phi_philo_clear(t_philo *philo, int *const ret);
 int		phi_philo_eat(t_philo *const philo, int *const ret);
 int		phi_philo_sleep(t_philo *const philo, int *const ret);
 int		phi_philo_state_msg(t_philo *const philo, int *const ret);

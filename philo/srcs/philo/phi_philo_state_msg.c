@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 11:53:51 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 00:28:25 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 18:20:13 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "state_msg_lookup.h"
 #include "enum/e_ret.h"
 
-static char const	*state_msg_get(int state)
+static char const	*state_msg_get(t_hhuint const state)
 {
 	int	i;
 
@@ -30,7 +30,6 @@ static char const	*state_msg_get(int state)
 
 static int	state_msg_print(char const *msg, t_huint const idx, int *const ret)
 {
-	t_mutex *const	voice = phi_voice_get();
 	t_ctx *const	ctx = phi_ctx_get();
 	t_lint			start;
 	t_lint			now;
@@ -42,21 +41,20 @@ static int	state_msg_print(char const *msg, t_huint const idx, int *const ret)
 	start = ctx->start;
 	if (pthread_mutex_unlock(&ctx->access))
 		return (*ret = MUTEX_UNLOCK_ERR);
-	if (pthread_mutex_lock(voice))
-		return (*ret = MUTEX_LOCK_ERR);
 	if (printf("%6li\t%3hu %s\n", now - start, idx, msg) == -1)
 		return (*ret = PRINTF_ERR);
-	if (pthread_mutex_unlock(voice))
-		return (*ret = MUTEX_UNLOCK_ERR);
 	return (*ret = SUCCESS);
 }
 
-int	phi_philo_state_msg(t_philo *philo, int *const ret)
+int	phi_philo_state_msg(t_philo *const philo, int *const ret)
 {
-	char const	*msg;
-	t_hhuint	state;
-	t_huint		idx;
+	t_mutex *const	voice = phi_voice_get();
+	char const		*msg;
+	t_hhuint		state;
+	t_huint			idx;
 
+	if (pthread_mutex_lock(voice))
+		return (*ret = MUTEX_LOCK_ERR);
 	if (pthread_mutex_lock(&philo->access))
 		return (*ret = MUTEX_LOCK_ERR);
 	idx = philo->idx;
@@ -68,5 +66,7 @@ int	phi_philo_state_msg(t_philo *philo, int *const ret)
 	msg = state_msg_get(state);
 	if (msg && state_msg_print(msg, idx, ret))
 		return (*ret);
+	if (pthread_mutex_unlock(voice))
+		return (*ret = MUTEX_UNLOCK_ERR);
 	return (*ret = SUCCESS);
 }

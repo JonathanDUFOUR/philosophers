@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 14:08:12 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 03:26:58 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 16:48:17 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		phi_limits_check(char const *str, t_lint nb);
 int		phi_lintlen(t_lint nb);
 int		phi_now(t_lint *const now);
 int		phi_run(void);
-int		phi_strcmp(char const *s1, char const *s2);
+int		phi_strcmp(char const *s0, char const *s1);
 
 void	phi_memdel(void *addr);
 

@@ -6,16 +6,16 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 01:37:05 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/11 01:38:52 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 18:30:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	phi_strcmp(char const *s1, char const *s2)
+int	phi_strcmp(char const *s0, char const *s1)
 {
-	while (*s1 && *s1 == *s2)
+	while (*s0 && *s0 == *s1)
 	{
+		++s0;
 		++s1;
-		++s2;
 	}
-	return (*s1 - *s2);
+	return (*s0 - *s1);
 }

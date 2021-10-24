@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:39:15 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/21 14:55:33 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 14:23:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ enum	e_ret
 	SIMULATION_STOP,
 	MUTEX_UNLOCK_ERR,
 	PTHREAD_JOIN_ERR,
+	MUTEX_DESTROY_ERR,
 	PTHREAD_CREATE_ERR,
 	GET_TIME_OF_DAY_ERR
 };

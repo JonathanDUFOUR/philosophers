@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phi_ctx_init_required_meals.c                      :+:      :+:    :+:   */
+/*   phi_voice_clear.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/11 03:45:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 16:49:38 by jodufour         ###   ########.fr       */
+/*   Created: 2021/10/24 14:20:13 by jodufour          #+#    #+#             */
+/*   Updated: 2021/10/24 14:23:12 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
-#include "type/t_ctx.h"
+#include "type/t_mutex.h"
 #include "enum/e_ret.h"
 
-int	phi_ctx_init_required_meals(char const *str)
+int	phi_voice_clear(int *const ret)
 {
-	t_ctx *const	ctx = phi_ctx_get();
+	t_mutex *const	voice = phi_voice_get();
 
-	if (!str)
-		return (SUCCESS);
-	while (phi_is_space(*str))
-		++str;
-	if (*str == '+')
-		++str;
-	while (*str == '0' && phi_is_digit(*(str + 1)))
-		++str;
-	ctx->required_meals = phi_atol(str);
-	return (phi_limits_check(str, ctx->required_meals));
+	if (pthread_mutex_destroy(voice))
+		return (*ret = MUTEX_DESTROY_ERR);
+	return (*ret = SUCCESS);
 }

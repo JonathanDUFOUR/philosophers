@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/08 23:18:36 by jodufour          #+#    #+#              #
-#    Updated: 2021/10/24 00:53:46 by jodufour         ###   ########.fr        #
+#    Updated: 2021/10/24 03:08:03 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,6 @@ SRC		=	\
 				phi_ctx_init_time_to_eat.c		\
 				phi_ctx_init_time_to_sleep.c	\
 				phi_ctx_init.c					\
-				phi_ctx_print.c					\
 			}									\
 			${addprefix manager/,				\
 				phi_manager_born.c				\
@@ -70,6 +69,7 @@ SRC		=	\
 				phi_lintlen.c					\
 				phi_memdel.c					\
 				phi_strcmp.c					\
+				phi_strlen.c					\
 			}									\
 			${addprefix voice/,					\
 				phi_voice_get.c					\

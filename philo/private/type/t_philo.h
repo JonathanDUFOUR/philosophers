@@ -6,17 +6,15 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 10:20:29 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 00:03:34 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 03:24:53 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef T_PHILO_H
 # define T_PHILO_H
 
-# include <pthread.h>
 # include "type/t_int.h"
 # include "type/t_mutex.h"
-# include "type/t_timeval.h"
 
 typedef struct s_philo	t_philo;
 

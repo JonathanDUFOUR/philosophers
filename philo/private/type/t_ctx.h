@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 17:35:55 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/16 09:06:58 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 03:00:08 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int		phi_ctx_init_time_to_eat(char const *s);
 int		phi_ctx_init_time_to_sleep(char const *s);
 int		phi_ctx_init_required_meals(char const *s);
 int		phi_ctx_init(char const **av);
-
-void	phi_ctx_print(void);
 
 t_ctx	*phi_ctx_get(void);
 

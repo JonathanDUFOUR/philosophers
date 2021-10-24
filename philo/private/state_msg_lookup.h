@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 12:02:35 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/14 17:47:56 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 03:27:33 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef struct s_state_msg	t_state_msg;
 
 struct s_state_msg
 {
-	t_hhuint	state;
-	char const	*msg;
+	t_hhuint const	state;
+	char const		*msg;
 };
 
 static t_state_msg const	g_state_msg[] = {

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 12:34:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/16 09:05:41 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 03:31:15 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	phi_philo_init(t_philo *philo, t_mutex *fork)
 
 	i = 0;
 	while (i < nb_philo)
-		pthread_mutex_init(fork + i++, NULL);
+	{
+		pthread_mutex_init(fork + i, NULL);
+		++i;
+	}
 	i = 0;
 	while (i < nb_philo)
 	{

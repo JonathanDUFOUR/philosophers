@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:59:18 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/21 15:01:22 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 03:26:34 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ struct s_err_msg
 };
 
 static const t_err_msg		g_err_msg[] = {
-	{AC_ERR, "Wrong argument count"},
-	{FORMAT_ERR, "Wrong argument(s) format"},
-	{LIMITS_ERR, "Input is over LONG_INT_MAX value"},
+	{AC_ERR, "wrong argument count"},
+	{FORMAT_ERR, "wrong argument(s) format"},
+	{LIMITS_ERR, "input is over LONG_INT_MAX value"},
 	{MALLOC_ERR, "malloc() failed"},
 	{USLEEP_ERR, "usleep() failed"},
 	{PRINTF_ERR, "printf() failed"},

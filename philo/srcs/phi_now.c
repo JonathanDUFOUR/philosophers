@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 20:26:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/18 20:18:09 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 03:19:27 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "type/t_timeval.h"
 #include "enum/e_ret.h"
 
-int	phi_now(t_lint *now)
+int	phi_now(t_lint *const now)
 {
 	t_timeval	tmp;
 

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:43:10 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 00:32:38 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/24 03:33:19 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	phi_philo_think(t_philo *const philo, int *const ret)
 	time_to_sleep = ctx->time_to_sleep;
 	if (pthread_mutex_unlock(&ctx->access))
 		return (*ret = MUTEX_UNLOCK_ERR);
-	if (time_to_eat > time_to_sleep
-		&& phi_philo_wait(philo, time_to_eat - time_to_sleep, ret))
-		return (*ret);
+	if (time_to_eat > time_to_sleep)
+		return (phi_philo_wait(philo, time_to_eat - time_to_sleep, ret));
 	return (*ret = SUCCESS);
 }

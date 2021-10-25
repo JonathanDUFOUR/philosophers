@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:43:10 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 18:28:26 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/10/25 15:19:53 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	phi_philo_think(t_philo *const philo, int *const ret)
 		return (*ret);
 	if (get_time_to_sleep(&time_to_sleep, ret))
 		return (*ret);
-	if (time_to_eat > time_to_sleep)
-		return (phi_philo_wait(philo, time_to_eat - time_to_sleep, ret));
+	if (time_to_eat >= time_to_sleep)
+		return (phi_philo_wait(philo, time_to_eat - time_to_sleep + 1, ret));
 	return (*ret = SUCCESS);
 }

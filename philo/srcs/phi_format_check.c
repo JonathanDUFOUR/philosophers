@@ -6,14 +6,14 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 00:08:33 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/11 00:17:50 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/11/08 04:04:04 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "enum/e_ret.h"
 
-int	phi_format_check(char const **av)
+int	phi_format_check(char const **av, int *const ret)
 {
 	char const	*ptr;
 
@@ -27,7 +27,7 @@ int	phi_format_check(char const **av)
 		while (phi_is_digit(*ptr))
 			++ptr;
 		if (*ptr)
-			return (FORMAT_ERR);
+			return (*ret = FORMAT_ERR);
 	}
-	return (SUCCESS);
+	return (*ret = SUCCESS);
 }

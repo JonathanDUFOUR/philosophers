@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 12:34:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 03:31:15 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/11/08 03:52:32 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 void	phi_philo_init(t_philo *philo, t_mutex *fork)
 {
-	t_uint const	nb_philo = phi_ctx_get()->nb_philo;
-	t_uint			i;
+	t_lint const	nb_philo = phi_ctx_get()->nb_philo;
+	t_lint			i;
 
 	i = 0;
 	while (i < nb_philo)

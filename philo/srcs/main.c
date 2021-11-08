@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:37:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/09/15 17:46:35 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/11/08 04:02:36 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,12 @@ int	main(int ac, char const **av)
 
 	if (ac == 5 || ac == 6)
 	{
-		ret = phi_format_check(av);
-		if (ret == SUCCESS)
-			ret = phi_ctx_init(av);
-		if (ret == SUCCESS)
-			ret = phi_run();
+		if (phi_format_check(av, &ret)
+			|| phi_ctx_init(av, &ret)
+			|| phi_run(&ret))
+			return (phi_err_msg(ret));
 	}
 	else
-		ret = AC_ERR;
-	if (ret != SUCCESS)
-		phi_err_msg(ret);
+		return (phi_err_msg(AC_ERR));
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 17:35:55 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 15:20:20 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/11/08 04:06:07 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ struct s_ctx
 };
 
 int		phi_ctx_clear(int *const ret);
-int		phi_ctx_init_nb_philo(char const *str);
-int		phi_ctx_init_time_to_die(char const *str);
-int		phi_ctx_init_time_to_eat(char const *str);
-int		phi_ctx_init_time_to_sleep(char const *str);
-int		phi_ctx_init_required_meals(char const *str);
-int		phi_ctx_init(char const **av);
+int		phi_ctx_init_nb_philo(char const *str, int *const ret);
+int		phi_ctx_init_time_to_die(char const *str, int *const ret);
+int		phi_ctx_init_time_to_eat(char const *str, int *const ret);
+int		phi_ctx_init_time_to_sleep(char const *str, int *const ret);
+int		phi_ctx_init_required_meals(char const *str, int *const ret);
+int		phi_ctx_init(char const **av, int *const ret);
 
 t_ctx	*phi_ctx_get(void);
 

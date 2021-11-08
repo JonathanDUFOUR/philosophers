@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 20:21:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 18:15:57 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/11/08 03:54:48 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static int	get_idx(
 	t_philo *const philo,
-	t_huint *const idx,
+	t_lint *const idx,
 	int *const ret)
 {
 	if (pthread_mutex_lock(&philo->access))
@@ -48,7 +48,7 @@ static int	start_signal(t_philo *const philo, int *const ret)
 	t_ctx *const	ctx = phi_ctx_get();
 	t_lint			time_to_eat;
 	t_lint			nb_philo;
-	t_huint			idx;
+	t_lint			idx;
 
 	if (get_idx(philo, &idx, ret))
 		return (*ret);

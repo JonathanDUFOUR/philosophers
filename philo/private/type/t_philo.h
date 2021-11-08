@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 10:20:29 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 14:52:35 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/11/08 03:52:00 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_philo	t_philo;
 struct s_philo
 {
 	pthread_t	thread;
-	t_huint		idx;
+	t_lint		idx;
 	t_hhuint	state;
 	t_lint		meal_count;
 	t_lint		last_meal;

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 12:02:35 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 03:27:33 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/30 21:07:21 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ struct s_state_msg
 };
 
 static t_state_msg const	g_state_msg[] = {
-	{TOOK_FORK, "has taken a fork"},
-	{EATING, "is eating"},
-	{SLEEPING, "is sleeping"},
-	{THINKING, "is thinking"},
-	{DEAD, "died"},
-	{0, NULL}
+{TOOK_FORK, "has taken a fork"},
+{EATING, "is eating"},
+{SLEEPING, "is sleeping"},
+{THINKING, "is thinking"},
+{DEAD, "died"},
+{0, NULL}
 };
 
 #endif

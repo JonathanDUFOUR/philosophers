@@ -6,14 +6,14 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:56:24 by jodufour          #+#    #+#             */
-/*   Updated: 2021/10/24 03:09:58 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/30 21:39:08 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "colors.h"
 #include "philosophers.h"
-#include "err_msg_lookup.h"
+#include "lookup_err_msg.h"
 
 int	phi_err_msg(int const err)
 {

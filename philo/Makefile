@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/08 23:18:36 by jodufour          #+#    #+#              #
-#    Updated: 2021/10/25 16:32:01 by jodufour         ###   ########.fr        #
+#    Updated: 2022/01/03 15:24:04 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,12 +128,14 @@ ${OBJ_DIR}%.o:	${SRC_DIR}%.c
 	${CC} $@ ${CFLAGS} $<
 
 clean:
-	${RM} ${OBJ_DIR}
+	${RM} ${OBJ_DIR} ${NAME} vgcore.*
 
 fclean:
-	${RM} ${OBJ_DIR} ${NAME}
+	${RM} ${OBJ_DIR} ${NAME} vgcore.*
 
-re:	fclean all
+re: clean all
+
+fre: fclean all
 
 -include /home/jodufour/Templates/mk_files/coffee.mk
 -include /home/jodufour/Templates/mk_files/norm.mk

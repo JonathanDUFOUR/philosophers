@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 11:53:51 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/08 03:57:08 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/03 15:18:50 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "philosophers.h"
 #include "type/t_ctx.h"
 #include "type/t_philo.h"
-#include "state_msg_lookup.h"
+#include "lookup_state_msg.h"
 #include "enum/e_ret.h"
 
 static char const	*state_msg_get(t_hhuint const state)

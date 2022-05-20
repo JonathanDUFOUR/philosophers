@@ -6,22 +6,22 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/08 23:18:36 by jodufour          #+#    #+#              #
-#    Updated: 2022/01/03 15:24:04 by jodufour         ###   ########.fr        #
+#    Updated: 2022/05/19 02:55:41 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ######################################
 #              COMMANDS              #
 ######################################
-CC		=	clang -c -o
-LINK	=	clang -o
+CC		=	clang
+LINK	=	clang
 MKDIR	=	mkdir -p
 RM		=	rm -rf
 
 ######################################
 #             EXECUTABLE             #
 ######################################
-NAME	=	philo
+NAME	=	philo.out
 
 #######################################
 #             DIRECTORIES             #
@@ -95,7 +95,8 @@ DEP		=	${OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-c
+CFLAGS	+=	-Wall -Wextra -Werror
 CFLAGS	+=	-MMD -MP
 CFLAGS	+=	-I${PRV_DIR}
 
@@ -116,16 +117,18 @@ LDFLAGS	+=	-lpthread
 #######################################
 #                RULES                #
 #######################################
-${NAME}:	${OBJ}
-	${LINK} $@ $^ ${LDFLAGS}
+.PHONY: all clean fclean re fre
 
-all:	${NAME}
+${NAME}: ${OBJ}
+	${LINK} $^ ${LDFLAGS} ${OUTPUT_OPTION}
+
+all: ${NAME}
 
 -include ${DEP}
 
-${OBJ_DIR}%.o:	${SRC_DIR}%.c
+${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@${MKDIR} ${@D}
-	${CC} $@ ${CFLAGS} $<
+	${CC} $< ${CFLAGS} ${OUTPUT_OPTION}
 
 clean:
 	${RM} ${OBJ_DIR} ${NAME} vgcore.*
@@ -137,7 +140,5 @@ re: clean all
 
 fre: fclean all
 
--include /home/jodufour/Templates/mk_files/coffee.mk
--include /home/jodufour/Templates/mk_files/norm.mk
-
-.PHONY:	all clean fclean re coffee norm
+-include ${HOME}/Templates/mk_files/coffee.mk
+-include ${HOME}/Templates/mk_files/norm.mk

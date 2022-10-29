@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/08 23:18:36 by jodufour          #+#    #+#              #
-#    Updated: 2022/05/19 02:55:41 by jodufour         ###   ########.fr        #
+#    Updated: 2022/10/29 07:31:22 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,9 @@ NAME	=	philo.out
 #######################################
 #             DIRECTORIES             #
 #######################################
-SRC_DIR	=	srcs/
-OBJ_DIR	=	objs/
-PRV_DIR	=	private/
+SRC_DIR	=	srcs
+OBJ_DIR	=	objs
+PRV_DIR	=	private
 
 ######################################
 #            SOURCE FILES            #
@@ -88,7 +88,7 @@ SRC		=	\
 #            OBJECT FILES            #
 ######################################
 OBJ		=	${SRC:.c=.o}
-OBJ		:=	${addprefix ${OBJ_DIR}, ${OBJ}}
+OBJ		:=	${addprefix ${OBJ_DIR}/, ${OBJ}}
 
 DEP		=	${OBJ:.o=.d}
 
@@ -126,7 +126,7 @@ all: ${NAME}
 
 -include ${DEP}
 
-${OBJ_DIR}%.o: ${SRC_DIR}%.c
+${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
 	@${MKDIR} ${@D}
 	${CC} $< ${CFLAGS} ${OUTPUT_OPTION}
 

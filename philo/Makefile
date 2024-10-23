@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 20:48:19 by jodufour          #+#    #+#              #
-#    Updated: 2024/10/23 22:18:44 by jodufour         ###   ########.fr        #
+#    Updated: 2024/10/23 22:22:13 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC := \
 		parse_the_arguments \
 		prepare_the_simulation \
 		run_the_simulation \
+		watch_the_time \
 	} \
 
 ######################################

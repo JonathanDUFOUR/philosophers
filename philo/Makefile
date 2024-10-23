@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 20:48:19 by jodufour          #+#    #+#              #
-#    Updated: 2024/10/21 00:16:04 by jodufour         ###   ########.fr        #
+#    Updated: 2024/10/23 22:18:44 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,9 @@ PRV_DIR := private
 SRC := \
 	${addsuffix .c, \
 		main \
-		parse_arguments \
-		setup \
+		parse_the_arguments \
+		prepare_the_simulation \
+		run_the_simulation \
 	} \
 
 ######################################

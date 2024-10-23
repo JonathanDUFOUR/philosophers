@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   status.h                                           :+:      :+:    :+:   */
+/*   program_arguments.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/19 17:43:17 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/21 10:43:56 by jodufour         ###   ########.fr       */
+/*   Created: 2024/10/19 18:07:53 by jodufour          #+#    #+#             */
+/*   Updated: 2024/10/23 22:10:21 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STATUS_H
-# define STATUS_H
+#ifndef PROGRAM_ARGUMENTS_H
+# define PROGRAM_ARGUMENTS_H
 
-typedef enum e_status	t_status;
+typedef struct s_program_arguments	t_program_arguments;
 
-enum e_status
+struct s_program_arguments
 {
-	OK,
-	ERR_ARGUMENT_COUNT,
-	ERR_PARSE_U8_EMPTY_STRING,
-	ERR_PARSE_U8_NON_DIGIT,
-	ERR_PARSE_U8_OVERFLOW,
-	ERR_PARSE_U16_EMPTY_STRING,
-	ERR_PARSE_U16_NON_DIGIT,
-	ERR_PARSE_U16_OVERFLOW,
-	ERR_NUMBER_OF_PHILOSOPHERS,
-	ERR_MALLOC,
-	STATUS_COUNT
+	// All the following times are in milliseconds.
+	__UINT16_TYPE__	time_to_die;
+	__UINT16_TYPE__	time_to_eat;
+	__UINT16_TYPE__	time_to_sleep;
+	__UINT8_TYPE__	number_of_philosophers;
+	__UINT8_TYPE__	number_of_time_each_philosopher_must_eat;
 };
 
 #endif

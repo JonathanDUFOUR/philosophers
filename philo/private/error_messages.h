@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 17:51:49 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/20 23:18:37 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:01:52 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ struct s_error_message
 # define ERR_MSG_NUMBER_OF_PHILOSOPHERS \
 "number_of_philosophers must be greater than 0"
 
+# define ERR_MSG_MALLOC \
+"malloc failed"
+
 static t_error_message const	g_error_messages[STATUS_COUNT] = {
 [OK] = {
 	.s = NULL,
@@ -55,36 +58,40 @@ static t_error_message const	g_error_messages[STATUS_COUNT] = {
 },
 [ERR_ARGUMENT_COUNT] = {
 	.s = ERR_MSG_ARGUMENT_COUNT "\n",
-	.len = sizeof(ERR_MSG_ARGUMENT_COUNT)
+	.len = sizeof(ERR_MSG_ARGUMENT_COUNT),
 },
 [ERR_PARSE_U8_EMPTY_STRING] = {
 	.s = ERR_MSG_PARSE_U8_EMPTY "\n",
-	.len = sizeof(ERR_MSG_PARSE_U8_EMPTY)
+	.len = sizeof(ERR_MSG_PARSE_U8_EMPTY),
 },
 [ERR_PARSE_U8_NON_DIGIT] = {
 	.s = ERR_MSG_PARSE_U8_NON_DIGIT "\n",
-	.len = sizeof(ERR_MSG_PARSE_U8_NON_DIGIT)
+	.len = sizeof(ERR_MSG_PARSE_U8_NON_DIGIT),
 },
 [ERR_PARSE_U8_OVERFLOW] = {
 	.s = ERR_MSG_PARSE_U8_OVERFLOW "\n",
-	.len = sizeof(ERR_MSG_PARSE_U8_OVERFLOW)
+	.len = sizeof(ERR_MSG_PARSE_U8_OVERFLOW),
 },
 [ERR_PARSE_U16_EMPTY_STRING] = {
 	.s = ERR_MSG_PARSE_U16_EMPTY "\n",
-	.len = sizeof(ERR_MSG_PARSE_U16_EMPTY)
+	.len = sizeof(ERR_MSG_PARSE_U16_EMPTY),
 },
 [ERR_PARSE_U16_NON_DIGIT] = {
 	.s = ERR_MSG_PARSE_U16_NON_DIGIT "\n",
-	.len = sizeof(ERR_MSG_PARSE_U16_NON_DIGIT)
+	.len = sizeof(ERR_MSG_PARSE_U16_NON_DIGIT),
 },
 [ERR_PARSE_U16_OVERFLOW] = {
 	.s = ERR_MSG_PARSE_U16_OVERFLOW "\n",
-	.len = sizeof(ERR_MSG_PARSE_U16_OVERFLOW)
+	.len = sizeof(ERR_MSG_PARSE_U16_OVERFLOW),
 },
 [ERR_NUMBER_OF_PHILOSOPHERS] = {
 	.s = ERR_MSG_NUMBER_OF_PHILOSOPHERS "\n",
-	.len = sizeof(ERR_MSG_NUMBER_OF_PHILOSOPHERS)
+	.len = sizeof(ERR_MSG_NUMBER_OF_PHILOSOPHERS),
 },
+[ERR_MALLOC] = {
+	.s = ERR_MSG_MALLOC "\n",
+	.len = sizeof(ERR_MSG_MALLOC),
+}
 };
 
 #endif

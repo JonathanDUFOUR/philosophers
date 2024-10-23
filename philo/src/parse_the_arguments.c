@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_arguments.c                                  :+:      :+:    :+:   */
+/*   parse_the_arguments.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:37:38 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/21 00:15:37 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:54:32 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "arguments.h"
+#include "program_arguments.h"
 #include "status.h"
 #include <stdbool.h>
 
@@ -51,8 +51,8 @@ inline static bool	parse_u8(
 	n = 0;
 	while (is_digit(*s))
 	{
-		if (__builtin_mul_overflow(n, 10, &n)
-			|| __builtin_add_overflow(n, *s - '0', &n))
+		if (__builtin_mul_overflow(n, 10, &n) || \
+			__builtin_add_overflow(n, *s - '0', &n))
 			return (*status = ERR_PARSE_U8_OVERFLOW, true);
 		++s;
 	}
@@ -90,8 +90,8 @@ inline static bool	parse_u16(
 	n = 0;
 	while (is_digit(*s))
 	{
-		if (__builtin_mul_overflow(n, 10, &n)
-			|| __builtin_add_overflow(n, *s - '0', &n))
+		if (__builtin_mul_overflow(n, 10, &n) || \
+			__builtin_add_overflow(n, *s - '0', &n))
 			return (*status = ERR_PARSE_U16_OVERFLOW, true);
 		++s;
 	}
@@ -105,27 +105,27 @@ inline static bool	parse_u16(
  *        and if so, parses them and save their values in a given structure.
  *        If the arguments are invalid, sets the given status accordingly.
  * 
- * @param ac The number of arguments passed to the program.
- * @param av The arguments passed to the program.
  * @param arguments A reference to the structure where to store the arguments
  *                  once parsed.
+ * @param ac The number of arguments passed to the program.
+ * @param av The arguments passed to the program.
  * @param status A reference to the status to set if the arguments are invalid.
  * 
  * @return `true` if the arguments are invalid, `false` otherwise.
  */
-bool	parse_arguments(
+bool	parse_the_arguments(
+	t_program_arguments *const arguments,
 	int const ac,
 	char const *const *const av,
-	t_arguments *const arguments,
 	t_status *const status)
 {
 	if (ac != 5 && ac != 6)
 		return (*status = ERR_ARGUMENT_COUNT, true);
-	if (parse_u8(av[1], &arguments->number_of_philosophers, status)
-		|| parse_u16(av[2], &arguments->time_to_die, status)
-		|| parse_u16(av[3], &arguments->time_to_eat, status)
-		|| parse_u16(av[4], &arguments->time_to_sleep, status)
-		|| ac == 6 && parse_u8(
+	if (parse_u8(av[1], &arguments->number_of_philosophers, status) || \
+		parse_u16(av[2], &arguments->time_to_die, status) || \
+		parse_u16(av[3], &arguments->time_to_eat, status) || \
+		parse_u16(av[4], &arguments->time_to_sleep, status) || \
+		ac == 6 && parse_u8(
 			av[5], &arguments->number_of_time_each_philosopher_must_eat, status
 		))
 		return (true);

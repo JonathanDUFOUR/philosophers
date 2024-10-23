@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:48:51 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/21 00:15:53 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:51:02 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,18 @@ inline static int	error_message(t_status const status)
 
 int	main(int const ac, char const *const *const av)
 {
-	t_status		status;
-	t_arguments		arguments;
-	t_philosopher	*philosophers;
-	pthread_mutex_t	*forks;
+	t_program_arguments	program_arguments;
+	t_simulation_data	simulation_data;
+	t_status			status;
 
-	if (parse_arguments(ac, av, &arguments, &status)
-		|| setup(&arguments, &philosophers, &forks, &status))
+	if (parse_the_arguments(&program_arguments, ac, av, &status) || \
+		prepare_the_simulation(&simulation_data, &program_arguments, &status))
+		return (error_message(status));
+	status = OK;
+	run_the_simulation(&simulation_data);
+	free(simulation_data.philosophers);
+	free(simulation_data.forks);
+	if (status)
 		return (error_message(status));
 	return (EXIT_SUCCESS);
 }

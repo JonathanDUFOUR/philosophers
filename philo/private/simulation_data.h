@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arguments.h                                        :+:      :+:    :+:   */
+/*   simulation_data.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/19 18:07:53 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/20 23:33:07 by jodufour         ###   ########.fr       */
+/*   Created: 2024/10/22 00:40:57 by jodufour          #+#    #+#             */
+/*   Updated: 2024/10/22 15:14:13 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ARGUMENTS_H
-# define ARGUMENTS_H
+#ifndef SIMULATION_DATA_H
+# define SIMULATION_DATA_H
 
-typedef struct s_arguments	t_arguments;
+# include "philosopher.h"
 
-struct s_arguments
+typedef struct s_simulation_data	t_simulation_data;
+
+struct s_simulation_data
 {
-	__UINT16_TYPE__	time_to_die;
-	__UINT16_TYPE__	time_to_eat;
-	__UINT16_TYPE__	time_to_sleep;
-	__UINT8_TYPE__	number_of_philosophers;
-	__UINT8_TYPE__	number_of_time_each_philosopher_must_eat;
+	pthread_mutex_t	voice;
+	pthread_mutex_t	*forks;
+	t_philosopher	*philosophers;
 };
 
 #endif

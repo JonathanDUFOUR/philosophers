@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:48:51 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 21:21:19 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 22:25:22 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
  * 
  * @return Always `EXIT_FAILURE`.
  */
-inline static int	error_message(t_status const status)
+inline static int
+	error_message(
+		t_status const status
+	)
 {
 	t_error_message const *const	message = &g_error_messages[status];
 	char const						prefix[] = {
@@ -37,7 +40,11 @@ inline static int	error_message(t_status const status)
 	return (EXIT_FAILURE);
 }
 
-int	main(int const ac, char const *const *const av)
+int
+	main(
+		int const ac,
+		char const *const *const av
+	)
 {
 	t_program_arguments	program_arguments;
 	t_simulation		simulation;

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:32:10 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 21:52:06 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 22:18:05 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@
  * 
  * @param n The number of forks and philosophers in the simulation.
  */
-void	clean_the_simulation(t_simulation *const simulation, uint8_t n)
+void
+	clean_the_simulation(
+		t_simulation *const simulation,
+		uint8_t n
+	)
 {
 	pthread_mutex_destroy(&simulation->common);
 	while (!__builtin_sub_overflow(n, 1, &n))

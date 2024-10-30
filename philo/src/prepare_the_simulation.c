@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:56:55 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 21:51:26 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 22:28:26 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@
  * 
  * @return `true` if the malloc() fails, `false` otherwise.
  */
-inline static bool	allocate(
-	t_simulation *const simulation,
-	uint8_t const number_of_philosophers)
+inline static bool
+	allocate(
+		t_simulation *const simulation,
+		uint8_t const number_of_philosophers
+	)
 {
 	simulation->forks = malloc(
 			number_of_philosophers * sizeof(*simulation->forks));
@@ -63,11 +65,13 @@ inline static bool	allocate(
  * 
  * @param time_to_think How many microseconds the philosopher must think.
  */
-inline static void	initialize_the_nth_philosopher(
-	t_simulation *const simulation,
-	uint8_t const n,
-	t_program_arguments const *const program_arguments,
-	__useconds_t const time_to_think)
+inline static void
+	initialize_the_nth_philosopher(
+		t_simulation *const simulation,
+		uint8_t const n,
+		t_program_arguments const *const program_arguments,
+		__useconds_t const time_to_think
+	)
 {
 	t_philosopher *const	philosopher = &simulation->philosophers[n];
 
@@ -96,11 +100,13 @@ inline static void	initialize_the_nth_philosopher(
  * 
  * @param time_to_think How many microseconds the philosopher must think.
  */
-inline static void	initialize_the_last_philosopher(
-	t_simulation *const simulation,
-	uint8_t const last,
-	t_program_arguments const *const program_arguments,
-	__useconds_t const time_to_think)
+inline static void
+	initialize_the_last_philosopher(
+		t_simulation *const simulation,
+		uint8_t const last,
+		t_program_arguments const *const program_arguments,
+		__useconds_t const time_to_think
+	)
 {
 	if (last & 1)
 	{
@@ -127,10 +133,12 @@ inline static void	initialize_the_last_philosopher(
  * 
  * @param time_to_think How many microseconds the philosophers must think.
  */
-inline static void	initialize_the_forks_and_the_philosophers(
-	t_simulation *const simulation,
-	t_program_arguments const *const program_arguments,
-	__useconds_t const time_to_think)
+inline static void
+	initialize_the_forks_and_the_philosophers(
+		t_simulation *const simulation,
+		t_program_arguments const *const program_arguments,
+		__useconds_t const time_to_think
+	)
 {
 	uint8_t const	last = program_arguments->number_of_philosophers - 1;
 	uint8_t			i;
@@ -171,10 +179,12 @@ inline static void	initialize_the_forks_and_the_philosophers(
  * 
  * @return `true` if an allocation fails, `false` otherwise.
  */
-bool	prepare_the_simulation(
-	t_simulation *const simulation,
-	t_program_arguments const *const program_arguments,
-	t_status *const status)
+bool
+	prepare_the_simulation(
+		t_simulation *const simulation,
+		t_program_arguments const *const program_arguments,
+		t_status *const status
+	)
 {
 	bool const			is_odd = program_arguments->number_of_philosophers & 1;
 	__useconds_t const	time_to_eat_again

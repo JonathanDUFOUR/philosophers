@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:37:38 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 14:56:49 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 22:26:42 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 /**
  * @return `true` if the given character is a digit, `false` otherwise.
  */
-inline static bool	is_digit(char const c)
+inline static bool
+	is_digit(
+		char const c
+	)
 {
 	return (c >= '0' && c <= '9');
 }
@@ -35,10 +38,12 @@ inline static bool	is_digit(char const c)
  * 
  * @return `true` if the parsing fails, `false` otherwise.
  */
-inline static bool	parse_u8(
-	char const *s,
-	uint8_t *const n_addr,
-	t_status *const status)
+inline static bool
+	parse_u8(
+		char const *s,
+		uint8_t *const n_addr,
+		t_status *const status
+	)
 {
 	uint8_t	n;
 
@@ -76,10 +81,12 @@ inline static bool	parse_u8(
  * 
  * @return `true` if the parsing fails, `false` otherwise.
  */
-inline static bool	parse_u16(
-	char const *s,
-	uint16_t *const n_addr,
-	t_status *const status)
+inline static bool
+	parse_u16(
+		char const *s,
+		uint16_t *const n_addr,
+		t_status *const status
+	)
 {
 	uint16_t	n;
 
@@ -120,11 +127,13 @@ inline static bool	parse_u16(
  * 
  * @return `true` an argument is invalid, `false` otherwise.
  */
-bool	parse_the_arguments(
-	t_program_arguments *const program_arguments,
-	int const ac,
-	char const *const *const av,
-	t_status *const status)
+bool
+	parse_the_arguments(
+		t_program_arguments *const program_arguments,
+		int const ac,
+		char const *const *const av,
+		t_status *const status
+	)
 {
 	uint16_t	time_to_die;
 	uint16_t	time_to_eat;

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:03:02 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 15:51:37 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 22:27:34 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@
  * 
  * @param philosopher A reference to the philosopher that died.
  */
-inline static void	announce_the_death_of(t_philosopher *const philosopher)
+inline static void
+	announce_the_death_of(
+		t_philosopher *const philosopher
+	)
 {
 	pthread_mutex_lock(philosopher->common);
 	if (*philosopher->simulation_is_running)
@@ -41,7 +44,10 @@ inline static void	announce_the_death_of(t_philosopher *const philosopher)
  * @param philosopher A reference to the philosopher that will take
  *        the forks, eat, and put the forks back on the table.
  */
-inline static void	eat(t_philosopher *const philosopher)
+inline static void
+	eat(
+		t_philosopher *const philosopher
+	)
 {
 	pthread_mutex_lock(philosopher->forks[0]);
 	pthread_mutex_lock(philosopher->common);
@@ -72,7 +78,10 @@ inline static void	eat(t_philosopher *const philosopher)
  * 
  * @param philosopher A reference to the philosopher that will sleep.
  */
-inline static void	sleep(t_philosopher *const philosopher)
+inline static void
+	sleep(
+		t_philosopher *const philosopher
+	)
 {
 	pthread_mutex_lock(philosopher->common);
 	if (*philosopher->simulation_is_running)
@@ -89,7 +98,10 @@ inline static void	sleep(t_philosopher *const philosopher)
  * 
  * @param philosopher A reference to the philosopher that will think.
  */
-inline static void	think(t_philosopher *const philosopher)
+inline static void
+	think(
+		t_philosopher *const philosopher
+	)
 {
 	pthread_mutex_lock(philosopher->common);
 	if (*philosopher->simulation_is_running)
@@ -109,12 +121,14 @@ inline static void	think(t_philosopher *const philosopher)
  *        - sleep
  *        - think
  * 
- * @param raw A reference to the philosopher that will execute
- *        its life cycle.
+ * @param raw A reference to the philosopher that will execute its life cycle.
  * 
  * @return Always `NULL`.
  */
-void	*philosopher_routine(void *const raw)
+void
+	*philosopher_routine(
+		void *const raw
+	)
 {
 	t_philosopher *const	philosopher = raw;
 

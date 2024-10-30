@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:42:03 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 15:46:33 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 22:24:32 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@
  * 
  * @return How many microseconds have been elapsed since `earlier`.
  */
-__useconds_t	elapsed_time_since(struct timeval const *const earlier)
+__useconds_t
+	elapsed_time_since(
+		struct timeval const *const earlier
+	)
 {
 	struct timeval	now;
 

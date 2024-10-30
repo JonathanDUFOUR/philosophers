@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:40:22 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 15:55:20 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 22:28:48 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@
  * 
  * @return `true` if the philosopher dies, `false` otherwise.
  */
-bool	watch_the_time(
-	__useconds_t const duration,
-	t_philosopher *const philosopher)
+bool
+	watch_the_time(
+		__useconds_t const duration,
+		t_philosopher *const philosopher
+	)
 {
 	struct timeval	start;
 

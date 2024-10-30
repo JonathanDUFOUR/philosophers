@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 02:39:42 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 02:54:02 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 22:24:51 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@
  * 
  * @return `true` if a thread creation fails, `false` otherwise.
  */
-bool	launch_the_simulation(
-	t_simulation *const simulation,
-	uint8_t const number_of_philosophers,
-	t_status *const status)
+bool
+	launch_the_simulation(
+		t_simulation *const simulation,
+		uint8_t const number_of_philosophers,
+		t_status *const status
+	)
 {
 	uint8_t	i;
 

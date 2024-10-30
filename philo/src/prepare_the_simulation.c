@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:56:55 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 12:19:45 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 21:51:26 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ inline static void	initialize_the_nth_philosopher(
 {
 	t_philosopher *const	philosopher = &simulation->philosophers[n];
 
-	philosopher->meals = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+	pthread_mutex_init(&philosopher->meals, NULL);
 	philosopher->common = &simulation->common;
 	philosopher->simulation_is_running = &simulation->is_running;
 	philosopher->time_to_die = program_arguments->time_to_die;
@@ -138,7 +138,7 @@ inline static void	initialize_the_forks_and_the_philosophers(
 	i = 0;
 	while (i < last)
 	{
-		simulation->forks[i] = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+		pthread_mutex_init(&simulation->forks[i], NULL);
 		simulation->philosophers[i].forks[0] = &simulation->forks[i + 0];
 		simulation->philosophers[i].forks[1] = &simulation->forks[i + 1];
 		initialize_the_nth_philosopher(
@@ -146,14 +146,14 @@ inline static void	initialize_the_forks_and_the_philosophers(
 		++i;
 		if (i == last)
 			break ;
-		simulation->forks[i] = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+		pthread_mutex_init(&simulation->forks[i], NULL);
 		simulation->philosophers[i].forks[0] = &simulation->forks[i + 1];
 		simulation->philosophers[i].forks[1] = &simulation->forks[i + 0];
 		initialize_the_nth_philosopher(
 			simulation, i, program_arguments, time_to_think);
 		++i;
 	}
-	simulation->forks[last] = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+	pthread_mutex_init(&simulation->forks[last], NULL);
 	initialize_the_last_philosopher(
 		simulation, last, program_arguments, time_to_think);
 }
@@ -186,7 +186,7 @@ bool	prepare_the_simulation(
 
 	if (allocate(simulation, program_arguments->number_of_philosophers))
 		return (*status = ERR_MALLOC, true);
-	simulation->common = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+	pthread_mutex_init(&simulation->common, NULL);
 	initialize_the_forks_and_the_philosophers(
 		simulation, program_arguments, time_to_think);
 	simulation->is_running = false;

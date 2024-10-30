@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:40:18 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 15:58:37 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 21:22:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # include "status.h"
 
 void
-clean_the_simulation(t_simulation *const simulation)
+clean_the_simulation(
+	t_simulation *const simulation,
+	uint8_t number_of_philosophers)
 __attribute__((nonnull));
 void
 monitor_the_simulation(

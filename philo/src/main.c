@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:48:51 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/29 03:15:47 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 21:21:19 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int const ac, char const *const *const av)
 		wait_for_all_threads(
 			simulation.threads, program_arguments.number_of_philosophers);
 	}
-	clean_the_simulation(&simulation);
+	clean_the_simulation(&simulation, program_arguments.number_of_philosophers);
 	if (status != OK)
 		return (error_message(status));
 	return (EXIT_SUCCESS);

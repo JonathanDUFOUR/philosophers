@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 17:51:49 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/21 11:01:52 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/25 21:39:06 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ struct s_error_message
 "number_of_philosophers must be greater than 0"
 
 # define ERR_MSG_MALLOC \
-"malloc failed"
+"malloc: failed to allocate memory"
+
+# define ERR_MSG_PTHREAD_CREATE \
+"pthread_create: failed to create another thread"
 
 static t_error_message const	g_error_messages[STATUS_COUNT] = {
 [OK] = {
@@ -91,7 +94,11 @@ static t_error_message const	g_error_messages[STATUS_COUNT] = {
 [ERR_MALLOC] = {
 	.s = ERR_MSG_MALLOC "\n",
 	.len = sizeof(ERR_MSG_MALLOC),
-}
+},
+[ERR_PTHREAD_CREATE] = {
+	.s = ERR_MSG_PTHREAD_CREATE "\n",
+	.len = sizeof(ERR_MSG_PTHREAD_CREATE),
+},
 };
 
 #endif

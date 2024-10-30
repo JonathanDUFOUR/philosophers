@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simulation_data.h                                  :+:      :+:    :+:   */
+/*   clean_the_simulation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 00:40:57 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/22 15:14:13 by jodufour         ###   ########.fr       */
+/*   Created: 2024/10/29 02:32:10 by jodufour          #+#    #+#             */
+/*   Updated: 2024/10/29 02:32:56 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIMULATION_DATA_H
-# define SIMULATION_DATA_H
+#include "simulation.h"
+#include <stdlib.h>
 
-# include "philosopher.h"
-
-typedef struct s_simulation_data	t_simulation_data;
-
-struct s_simulation_data
+/**
+ * @brief Frees the memory allocated for the forks, philosophers, and threads.
+ * 
+ * @param simulation A reference to the simulation data to clean.
+ */
+void	clean_the_simulation(t_simulation *const simulation)
 {
-	pthread_mutex_t	voice;
-	pthread_mutex_t	*forks;
-	t_philosopher	*philosophers;
-};
-
-#endif
+	free(simulation->forks);
+	free(simulation->philosophers);
+	free(simulation->threads);
+}

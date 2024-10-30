@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 20:48:19 by jodufour          #+#    #+#              #
-#    Updated: 2024/10/23 22:22:13 by jodufour         ###   ########.fr        #
+#    Updated: 2024/10/30 15:43:25 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,14 +33,18 @@ PRV_DIR := private
 ######################################
 #            SOURCE FILES            #
 ######################################
-SRC := \
-	${addsuffix .c, \
-		main \
-		parse_the_arguments \
-		prepare_the_simulation \
-		run_the_simulation \
-		watch_the_time \
-	} \
+SRC := ${addsuffix .c, \
+	clean_the_simulation \
+	elapsed_time_since \
+	launch_the_simulation \
+	main \
+	monitor_the_simulation \
+	parse_the_arguments \
+	philosopher_routine \
+	prepare_the_simulation \
+	wait_for_all_threads \
+	watch_the_time \
+}
 
 ######################################
 #            OBJECT FILES            #
@@ -53,17 +57,21 @@ DEP := ${OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS := \
+CFLAGS := ${strip \
 	-c \
-	-Wall -Wextra -Werror \
-	-Wno-logical-op-parentheses \
+	-Wall -Wextra \
 	-MMD -MP \
 	-I${PRV_DIR} \
+}
 
-LDFLAGS := 
+LDFLAGS := ${strip \
+}
 
 ifeq (${DEBUG}, 1)
 	CFLAGS += -gdwarf-4
+else ifeq (${DEBUG}, 2)
+	 CFLAGS += -g -fsanitize=address
+	LDFLAGS += -lasan
 endif
 
 #######################################
@@ -94,3 +102,6 @@ re: clean all
 
 .PHONY: fre
 fre: fclean all
+
+-include norm.mk
+-include coffee.mk

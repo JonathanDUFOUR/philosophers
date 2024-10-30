@@ -6,23 +6,27 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 18:07:53 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/23 22:10:21 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:27:55 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROGRAM_ARGUMENTS_H
 # define PROGRAM_ARGUMENTS_H
 
+# include <stdint.h>
+
 typedef struct s_program_arguments	t_program_arguments;
 
 struct s_program_arguments
 {
-	// All the following times are in milliseconds.
-	__UINT16_TYPE__	time_to_die;
-	__UINT16_TYPE__	time_to_eat;
-	__UINT16_TYPE__	time_to_sleep;
-	__UINT8_TYPE__	number_of_philosophers;
-	__UINT8_TYPE__	number_of_time_each_philosopher_must_eat;
+	// The following arguments are passed in milliseconds to the program,
+	// but they shall be stored in microseconds after being parsed.
+	__useconds_t	time_to_die;
+	__useconds_t	time_to_eat;
+	__useconds_t	time_to_sleep;
+
+	uint8_t			number_of_philosophers;
+	uint8_t			number_of_times_each_philosopher_must_eat;
 };
 
 #endif

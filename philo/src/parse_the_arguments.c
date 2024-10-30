@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:37:38 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/23 13:54:32 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 14:56:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,19 @@ inline static bool	is_digit(char const c)
  *        Leading whitespaces and signs are not supported.
  * 
  * @param s The string to parse.
+ * 
  * @param n_addr A reference to the variable to store the parsed value in.
+ * 
  * @param status A reference to the status to set if the parsing fails.
  * 
  * @return `true` if the parsing fails, `false` otherwise.
  */
 inline static bool	parse_u8(
 	char const *s,
-	__UINT8_TYPE__ *const n_addr,
+	uint8_t *const n_addr,
 	t_status *const status)
 {
-	__UINT8_TYPE__	n;
+	uint8_t	n;
 
 	if (!*s)
 		return (*status = ERR_PARSE_U8_EMPTY_STRING, true);
@@ -67,17 +69,19 @@ inline static bool	parse_u8(
  *        Leading whitespaces and signs are not supported.
  * 
  * @param s The string to parse.
+ * 
  * @param n_addr A reference to the variable to store the parsed value in.
+ * 
  * @param status A reference to the status to set if the parsing fails.
  * 
  * @return `true` if the parsing fails, `false` otherwise.
  */
 inline static bool	parse_u16(
 	char const *s,
-	__UINT16_TYPE__ *const n_addr,
+	uint16_t *const n_addr,
 	t_status *const status)
 {
-	__UINT16_TYPE__	n;
+	uint16_t	n;
 
 	if (!*s)
 		return (*status = ERR_PARSE_U16_EMPTY_STRING, true);
@@ -105,31 +109,43 @@ inline static bool	parse_u16(
  *        and if so, parses them and save their values in a given structure.
  *        If the arguments are invalid, sets the given status accordingly.
  * 
- * @param arguments A reference to the structure where to store the arguments
- *                  once parsed.
- * @param ac The number of arguments passed to the program.
- * @param av The arguments passed to the program.
- * @param status A reference to the status to set if the arguments are invalid.
+ * @param program_arguments A reference to the structure
+ *        where to store the arguments once parsed.
  * 
- * @return `true` if the arguments are invalid, `false` otherwise.
+ * @param ac The number of arguments passed to the program.
+ * 
+ * @param av The arguments passed to the program.
+ * 
+ * @param status A reference to the status to set if an argument is invalid.
+ * 
+ * @return `true` an argument is invalid, `false` otherwise.
  */
 bool	parse_the_arguments(
-	t_program_arguments *const arguments,
+	t_program_arguments *const program_arguments,
 	int const ac,
 	char const *const *const av,
 	t_status *const status)
 {
+	uint16_t	time_to_die;
+	uint16_t	time_to_eat;
+	uint16_t	time_to_sleep;
+
 	if (ac != 5 && ac != 6)
 		return (*status = ERR_ARGUMENT_COUNT, true);
-	if (parse_u8(av[1], &arguments->number_of_philosophers, status) || \
-		parse_u16(av[2], &arguments->time_to_die, status) || \
-		parse_u16(av[3], &arguments->time_to_eat, status) || \
-		parse_u16(av[4], &arguments->time_to_sleep, status) || \
-		ac == 6 && parse_u8(
-			av[5], &arguments->number_of_time_each_philosopher_must_eat, status
-		))
+	if (parse_u8(av[1], &program_arguments->number_of_philosophers, status) || \
+		parse_u16(av[2], &time_to_die, status) || \
+		parse_u16(av[3], &time_to_eat, status) || \
+		parse_u16(av[4], &time_to_sleep, status) || \
+		(ac == 6 && parse_u8(
+				av[5],
+				&program_arguments->number_of_times_each_philosopher_must_eat,
+				status
+			)))
 		return (true);
-	if (!arguments->number_of_philosophers)
+	if (!program_arguments->number_of_philosophers)
 		return (*status = ERR_NUMBER_OF_PHILOSOPHERS, true);
+	program_arguments->time_to_die = time_to_die * 1000;
+	program_arguments->time_to_eat = time_to_eat * 1000;
+	program_arguments->time_to_sleep = time_to_sleep * 1000;
 	return (false);
 }

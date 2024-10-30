@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 23:50:35 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 17:15:35 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/30 21:58:22 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,26 @@ inline static bool	at_least_1_philosopher_must_still_eat(
  *        and stops the simulation when every philosopher has eaten
  *        at least the specified number of times.
  * 
- * @param simulation_data A reference to the simulation data to use
- *        to monitor it.
+ * @param simulation A reference to the simulation data to use to monitor it.
  * 
  * @param program_arguments A reference to the program arguments to use
  *        to monitor the simulation.
  */
 void	monitor_the_simulation(
-	t_simulation *const simulation_data,
+	t_simulation *const simulation,
 	t_program_arguments const *const program_arguments)
 {
-	while (at_least_1_philosopher_must_still_eat(
-			simulation_data->philosophers,
+	pthread_mutex_lock(&simulation->common);
+	while (simulation->is_running
+		&& at_least_1_philosopher_must_still_eat(
+			simulation->philosophers,
 			program_arguments->number_of_philosophers,
 			program_arguments->number_of_times_each_philosopher_must_eat))
+	{
+		pthread_mutex_unlock(&simulation->common);
 		usleep(USLEEP_DURATION);
-	pthread_mutex_lock(&simulation_data->common);
-	simulation_data->is_running = false;
-	pthread_mutex_unlock(&simulation_data->common);
+		pthread_mutex_lock(&simulation->common);
+	}
+	simulation->is_running = false;
+	pthread_mutex_unlock(&simulation->common);
 }

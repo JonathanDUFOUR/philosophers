@@ -6,12 +6,11 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 23:50:35 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/31 22:53:44 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/31 23:31:21 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "simulation.h"
-#include "status.h"
 #include <unistd.h>
 
 /**

@@ -2,7 +2,5 @@
 !src
 !private
 !Makefile
-!README.md
-!illustration.jpg
-!License
 !.gitignore
+!check_meals.sh

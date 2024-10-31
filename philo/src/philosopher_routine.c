@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:03:02 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 22:27:34 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/31 23:16:34 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,12 @@ void
 	pthread_mutex_unlock(philosopher->common);
 	gettimeofday(&philosopher->simulation_start, NULL);
 	philosopher->last_meal = philosopher->simulation_start;
+	if (philosopher->forks[0] == philosopher->forks[1])
+	{
+		printf("      0   1 has taken a fork\n");
+		watch_the_time(philosopher->time_to_die, philosopher);
+		announce_the_death_of(philosopher);
+	}
 	pthread_mutex_lock(philosopher->common);
 	while (*philosopher->simulation_is_running)
 	{

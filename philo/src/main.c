@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:48:51 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 22:25:22 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/31 22:48:00 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,23 @@ int
 		char const *const *const av
 	)
 {
-	t_program_arguments	program_arguments;
+	t_program_arguments	arguments;
 	t_simulation		simulation;
 	t_status			status;
 
-	if (parse_the_arguments(&program_arguments, ac, av, &status) || \
-		prepare_the_simulation(&simulation, &program_arguments, &status))
+	if (parse_the_arguments(&arguments, ac, av, &status) || \
+		prepare_the_simulation(&simulation, &arguments, &status))
 		return (error_message(status));
 	status = OK;
 	if (!launch_the_simulation(
-			&simulation, program_arguments.number_of_philosophers, &status))
+			&simulation, arguments.number_of_philosophers, &status))
 	{
 		if (ac == 6)
-			monitor_the_simulation(&simulation, &program_arguments);
+			monitor_the_simulation(&simulation, &arguments);
 		wait_for_all_threads(
-			simulation.threads, program_arguments.number_of_philosophers);
+			simulation.threads, arguments.number_of_philosophers);
 	}
-	clean_the_simulation(&simulation, program_arguments.number_of_philosophers);
+	clean_the_simulation(&simulation, arguments.number_of_philosophers);
 	if (status != OK)
 		return (error_message(status));
 	return (EXIT_SUCCESS);

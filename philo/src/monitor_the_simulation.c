@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 23:50:35 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 22:25:53 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/31 22:53:44 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,21 @@ inline static bool
  * 
  * @param simulation A reference to the simulation data to use to monitor it.
  * 
- * @param program_arguments A reference to the program arguments to use
+ * @param arguments A reference to the program arguments to use
  *        to monitor the simulation.
  */
 void
 	monitor_the_simulation(
 		t_simulation *const simulation,
-		t_program_arguments const *const program_arguments
+		t_program_arguments const *const arguments
 	)
 {
 	pthread_mutex_lock(&simulation->common);
 	while (simulation->is_running
 		&& at_least_1_philosopher_must_still_eat(
 			simulation->philosophers,
-			program_arguments->number_of_philosophers,
-			program_arguments->number_of_times_each_philosopher_must_eat))
+			arguments->number_of_philosophers,
+			arguments->number_of_times_each_philosopher_must_eat))
 	{
 		pthread_mutex_unlock(&simulation->common);
 		usleep(USLEEP_DURATION);

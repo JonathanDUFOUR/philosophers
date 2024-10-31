@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:40:18 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 22:23:48 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/31 22:52:00 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ __attribute__((nonnull));
 void
 monitor_the_simulation(
 	t_simulation *const simulation,
-	t_program_arguments const *const program_arguments)
+	t_program_arguments const *const arguments)
 __attribute__((nonnull));
 
 bool

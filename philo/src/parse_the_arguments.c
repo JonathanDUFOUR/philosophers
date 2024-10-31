@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:37:38 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 22:26:42 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/10/31 22:50:56 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdbool.h>
 
 /**
- * @return `true` if the given character is a digit, `false` otherwise.
+ * @return `true` if the given character `c` is a digit, `false` otherwise.
  */
 inline static bool
 	is_digit(
@@ -116,8 +116,8 @@ inline static bool
  *        and if so, parses them and save their values in a given structure.
  *        If the arguments are invalid, sets the given status accordingly.
  * 
- * @param program_arguments A reference to the structure
- *        where to store the arguments once parsed.
+ * @param arguments A reference to the structure where to store the arguments
+ *        once parsed.
  * 
  * @param ac The number of arguments passed to the program.
  * 
@@ -125,11 +125,11 @@ inline static bool
  * 
  * @param status A reference to the status to set if an argument is invalid.
  * 
- * @return `true` an argument is invalid, `false` otherwise.
+ * @return `true` if an argument is invalid, `false` otherwise.
  */
 bool
 	parse_the_arguments(
-		t_program_arguments *const program_arguments,
+		t_program_arguments *const arguments,
 		int const ac,
 		char const *const *const av,
 		t_status *const status
@@ -141,20 +141,20 @@ bool
 
 	if (ac != 5 && ac != 6)
 		return (*status = ERR_ARGUMENT_COUNT, true);
-	if (parse_u8(av[1], &program_arguments->number_of_philosophers, status) || \
+	if (parse_u8(av[1], &arguments->number_of_philosophers, status) || \
 		parse_u16(av[2], &time_to_die, status) || \
 		parse_u16(av[3], &time_to_eat, status) || \
 		parse_u16(av[4], &time_to_sleep, status) || \
 		(ac == 6 && parse_u8(
 				av[5],
-				&program_arguments->number_of_times_each_philosopher_must_eat,
+				&arguments->number_of_times_each_philosopher_must_eat,
 				status
 			)))
 		return (true);
-	if (!program_arguments->number_of_philosophers)
+	if (!arguments->number_of_philosophers)
 		return (*status = ERR_NUMBER_OF_PHILOSOPHERS, true);
-	program_arguments->time_to_die = time_to_die * 1000;
-	program_arguments->time_to_eat = time_to_eat * 1000;
-	program_arguments->time_to_sleep = time_to_sleep * 1000;
+	arguments->time_to_die = time_to_die * 1000;
+	arguments->time_to_eat = time_to_eat * 1000;
+	arguments->time_to_sleep = time_to_sleep * 1000;
 	return (false);
 }

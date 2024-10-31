@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:36:53 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 22:28:38 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/01 00:49:34 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param threads An array of threads to wait for. It is assumed
  *        that the threads are all joinable.
  * 
- * @param number_of_threads The number of threads in the array.
+ * @param number_of_threads How many elements does `threads` contain.
  */
 void
 	wait_for_all_threads(

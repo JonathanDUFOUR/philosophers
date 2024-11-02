@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 20:48:19 by jodufour          #+#    #+#              #
-#    Updated: 2024/11/02 21:25:03 by jodufour         ###   ########.fr        #
+#    Updated: 2024/11/02 23:27:39 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,14 +35,13 @@ PRV_DIR := private
 ######################################
 SRC := ${addsuffix .c, \
 	clean_the_simulation \
-	elapsed_time_since \
 	launch_the_simulation \
 	main \
 	monitor_the_simulation \
 	parse_the_arguments \
 	philosopher_routine \
 	prepare_the_simulation \
-	suspend_the_thread_until_n_useconds_has_elapsed_since \
+	suspend_the_thread_for_n_useconds \
 	wait_for_all_threads \
 }
 

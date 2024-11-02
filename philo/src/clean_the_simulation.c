@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:32:10 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 22:18:05 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/02 23:04:05 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void
 		uint8_t n
 	)
 {
-	pthread_mutex_destroy(&simulation->common);
+	pthread_mutex_destroy(&simulation->shared);
 	while (!__builtin_sub_overflow(n, 1, &n))
 	{
 		pthread_mutex_destroy(&simulation->forks[n]);

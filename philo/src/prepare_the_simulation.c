@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:56:55 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/02 22:20:24 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/03 00:03:26 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,16 @@ inline static void
 	t_philosopher *const	philosopher = &simulation->philosophers[n];
 
 	pthread_mutex_init(&philosopher->meals, NULL);
-	philosopher->common = &simulation->common;
+	philosopher->shared = &simulation->shared;
 	philosopher->at_least_1_philosopher_must_still_eat
 		= &simulation->at_least_1_philosopher_must_still_eat;
+	philosopher->timestamp
+		= !(n & 1) * ((arguments->number_of_philosophers & 1 && !n) + 1)
+		* arguments->time_to_eat;
 	philosopher->time_to_die = arguments->time_to_die;
 	philosopher->time_to_eat = arguments->time_to_eat;
-	philosopher->time_to_eat_and_sleep
-		= arguments->time_to_eat
-		+ arguments->time_to_sleep;
-	philosopher->time_to_eat_and_sleep_and_think
-		= arguments->time_to_eat
-		+ arguments->time_to_sleep
-		+ time_to_think;
+	philosopher->time_to_sleep = arguments->time_to_sleep;
+	philosopher->time_to_think = time_to_think;
 	philosopher->someone_will_inevitably_die
 		= simulation->someone_will_inevitably_die;
 	philosopher->number_of_meals = 0;
@@ -164,7 +162,7 @@ bool
 
 	if (allocate(simulation, arguments->number_of_philosophers))
 		return (*status = ERR_MALLOC, true);
-	pthread_mutex_init(&simulation->common, NULL);
+	pthread_mutex_init(&simulation->shared, NULL);
 	simulation->someone_will_inevitably_die
 		= arguments->number_of_philosophers == 1
 		|| arguments->time_to_die

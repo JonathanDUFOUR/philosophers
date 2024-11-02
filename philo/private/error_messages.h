@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 17:51:49 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/30 22:14:13 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/02 23:58:54 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ struct s_error_message
 
 # define ERR_MSG_NUMBER_OF_PHILOSOPHERS \
 "number_of_philosophers must be greater than 0"
+
+# define ERR_MSG_NUMBER_OF_TIMES_EACH_PHILOSOPHER_MUST_EAT \
+"number_of_times_each_philosopher_must_eat must be greater than 0"
 
 # define ERR_MSG_MALLOC \
 "malloc: failed to allocate memory"
@@ -66,6 +69,10 @@ static t_error_message const	g_error_messages[STATUS_COUNT] = {
 [ERR_NUMBER_OF_PHILOSOPHERS] = {
 	.s = ERR_MSG_NUMBER_OF_PHILOSOPHERS "\n",
 	.len = sizeof(ERR_MSG_NUMBER_OF_PHILOSOPHERS),
+},
+[ERR_NUMBER_OF_TIMES_EACH_PHILOSOPHER_MUST_EAT] = {
+	.s = ERR_MSG_NUMBER_OF_TIMES_EACH_PHILOSOPHER_MUST_EAT "\n",
+	.len = sizeof(ERR_MSG_NUMBER_OF_TIMES_EACH_PHILOSOPHER_MUST_EAT),
 },
 [ERR_MALLOC] = {
 	.s = ERR_MSG_MALLOC "\n",

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 02:39:42 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/02 21:38:23 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/02 23:04:05 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool
 {
 	uint8_t	i;
 
-	pthread_mutex_lock(&simulation->common);
+	pthread_mutex_lock(&simulation->shared);
 	i = 0;
 	while (i < number_of_philosophers)
 	{
@@ -43,7 +43,7 @@ bool
 				philosopher_routine,
 				&simulation->philosophers[i]))
 		{
-			pthread_mutex_unlock(&simulation->common);
+			pthread_mutex_unlock(&simulation->shared);
 			while (i)
 				pthread_join(simulation->threads[--i], NULL);
 			return (*status = ERR_PTHREAD_CREATE, true);
@@ -51,6 +51,6 @@ bool
 		++i;
 	}
 	simulation->at_least_1_philosopher_must_still_eat = true;
-	pthread_mutex_unlock(&simulation->common);
+	pthread_mutex_unlock(&simulation->shared);
 	return (false);
 }

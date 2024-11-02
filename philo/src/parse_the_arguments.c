@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:37:38 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/02 22:31:07 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/03 00:16:46 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,16 +135,12 @@ bool
 		t_status *const status
 	)
 {
-	uint16_t	time_to_die;
-	uint16_t	time_to_eat;
-	uint16_t	time_to_sleep;
-
 	if (ac != 5 && ac != 6)
 		return (*status = ERR_ARGUMENT_COUNT, true);
 	if (parse_u8(av[1], &arguments->number_of_philosophers, status) || \
-		parse_u16(av[2], &time_to_die, status) || \
-		parse_u16(av[3], &time_to_eat, status) || \
-		parse_u16(av[4], &time_to_sleep, status) || \
+		parse_u16(av[2], &arguments->time_to_die, status) || \
+		parse_u16(av[3], &arguments->time_to_eat, status) || \
+		parse_u16(av[4], &arguments->time_to_sleep, status) || \
 		(ac == 6 && parse_u8(
 				av[5],
 				&arguments->number_of_times_each_philosopher_must_eat,
@@ -153,8 +149,7 @@ bool
 		return (true);
 	if (!arguments->number_of_philosophers)
 		return (*status = ERR_NUMBER_OF_PHILOSOPHERS, true);
-	arguments->time_to_die = time_to_die * 1000;
-	arguments->time_to_eat = time_to_eat * 1000;
-	arguments->time_to_sleep = time_to_sleep * 1000;
+	if (ac == 6 && !arguments->number_of_times_each_philosopher_must_eat)
+		return (*status = ERR_NUMBER_OF_TIMES_EACH_PHILOSOPHER_MUST_EAT, true);
 	return (false);
 }

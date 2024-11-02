@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:35:33 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/02 22:28:29 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/03 00:16:12 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,26 @@ struct s_philosopher
 {
 	pthread_mutex_t	meals;
 
-	struct timeval	simulation_start;
-	struct timeval	last_meal;
-
 	/* The forks are stored as the first to take and the second to take,
 	not as the left and right forks. */
 	pthread_mutex_t	*forks[2];
 
-	pthread_mutex_t	*common;
+	/* A mutex shared by all threads, to access shared data and avoid messing up
+	texts when printing */
+	pthread_mutex_t	*shared;
 
 	bool			*at_least_1_philosopher_must_still_eat;
 
-	/* In microseconds */
-	__useconds_t	time_to_die;
-	/* In microseconds */
-	__useconds_t	time_to_eat;
-	/* In microseconds */
-	__useconds_t	time_to_eat_and_sleep;
-	/* In microseconds */
-	__useconds_t	time_to_eat_and_sleep_and_think;
+	/* In milliseconds */
+	uint32_t		timestamp;
+	/* In milliseconds */
+	uint16_t		time_to_die;
+	/* In milliseconds */
+	uint16_t		time_to_eat;
+	/* In milliseconds */
+	uint16_t		time_to_sleep;
+	/* In milliseconds */
+	uint16_t		time_to_think;
 
 	bool			someone_will_inevitably_die;
 

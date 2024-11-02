@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:40:18 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/02 21:24:49 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/02 23:27:15 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,8 @@ prepare_the_simulation(
 __attribute__((nonnull));
 
 void
-suspend_the_thread_until_n_useconds_has_elapsed_since(
-	__useconds_t const duration,
-	struct timeval const *const start)
-__attribute__((nonnull));
+suspend_the_thread_for_n_useconds(
+	__useconds_t const duration);
 
 void
 wait_for_all_threads(

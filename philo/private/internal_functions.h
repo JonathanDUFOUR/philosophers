@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:40:18 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/31 22:52:00 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/02 21:24:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,15 @@ prepare_the_simulation(
 __attribute__((nonnull));
 
 void
+suspend_the_thread_until_n_useconds_has_elapsed_since(
+	__useconds_t const duration,
+	struct timeval const *const start)
+__attribute__((nonnull));
+
+void
 wait_for_all_threads(
 	pthread_t *const threads,
 	uint8_t number_of_threads)
-__attribute__((nonnull));
-
-bool
-watch_the_time(
-	__useconds_t const duration,
-	t_philosopher *const philosopher)
 __attribute__((nonnull));
 
 #endif

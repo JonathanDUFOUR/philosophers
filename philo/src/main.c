@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:48:51 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/31 22:48:00 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/02 21:52:42 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int
 	if (!launch_the_simulation(
 			&simulation, arguments.number_of_philosophers, &status))
 	{
-		if (ac == 6)
+		if (ac == 6 && !simulation.someone_will_inevitably_die)
 			monitor_the_simulation(&simulation, &arguments);
 		wait_for_all_threads(
 			simulation.threads, arguments.number_of_philosophers);

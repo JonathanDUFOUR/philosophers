@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:03:02 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/31 23:16:34 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/02 22:32:37 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 #include <stdio.h>
 
 /**
- * @brief Announces the death of a given philosopher, and marks the simulation
- *        as finished.
+ * @brief Make a given philosopher wait for its death, and then announce it.
  * 
- * @param philosopher A reference to the philosopher that died.
+ * @param philosopher A reference to the philosopher that will die.
  */
 inline static void
-	announce_the_death_of(
+	die(
 		t_philosopher *const philosopher
 	)
 {
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	suspend_the_thread_until_n_useconds_has_elapsed_since(
+		philosopher->time_to_die, &now);
 	pthread_mutex_lock(philosopher->common);
-	if (*philosopher->simulation_is_running)
-	{
-		printf("%7u %3hhu died\n",
-			elapsed_time_since(&philosopher->simulation_start) / 1000,
-			philosopher->identifer);
-		*philosopher->simulation_is_running = false;
-	}
+	printf("%7u %3hhu died\n",
+		philosopher->time_to_die / 1000,
+		philosopher->identifer);
 	pthread_mutex_unlock(philosopher->common);
 }
 
@@ -51,21 +51,19 @@ inline static void
 {
 	pthread_mutex_lock(philosopher->forks[0]);
 	pthread_mutex_lock(philosopher->common);
-	if (*philosopher->simulation_is_running)
-		printf("%7u %3hhu has taken a fork\n",
-			elapsed_time_since(&philosopher->simulation_start) / 1000,
-			philosopher->identifer);
+	printf("%7u %3hhu has taken a fork\n",
+		elapsed_time_since(&philosopher->simulation_start) / 1000,
+		philosopher->identifer);
 	pthread_mutex_unlock(philosopher->common);
 	pthread_mutex_lock(philosopher->forks[1]);
 	pthread_mutex_lock(philosopher->common);
-	if (*philosopher->simulation_is_running)
-		printf("%1$7u %2$3hhu has taken a fork\n%1$7u %2$3hhu is eating\n",
-			elapsed_time_since(&philosopher->simulation_start) / 1000,
-			philosopher->identifer);
+	printf("%1$7u %2$3hhu has taken a fork\n%1$7u %2$3hhu is eating\n",
+		elapsed_time_since(&philosopher->simulation_start) / 1000,
+		philosopher->identifer);
 	pthread_mutex_unlock(philosopher->common);
 	gettimeofday(&philosopher->last_meal, NULL);
-	if (watch_the_time(philosopher->time_to_eat, philosopher))
-		announce_the_death_of(philosopher);
+	suspend_the_thread_until_n_useconds_has_elapsed_since(
+		philosopher->time_to_eat, &philosopher->last_meal);
 	pthread_mutex_unlock(philosopher->forks[0]);
 	pthread_mutex_unlock(philosopher->forks[1]);
 	pthread_mutex_lock(&philosopher->meals);
@@ -84,13 +82,12 @@ inline static void
 	)
 {
 	pthread_mutex_lock(philosopher->common);
-	if (*philosopher->simulation_is_running)
-		printf("%7u %3hhu is sleeping\n",
-			elapsed_time_since(&philosopher->simulation_start) / 1000,
-			philosopher->identifer);
+	printf("%7u %3hhu is sleeping\n",
+		elapsed_time_since(&philosopher->simulation_start) / 1000,
+		philosopher->identifer);
 	pthread_mutex_unlock(philosopher->common);
-	if (watch_the_time(philosopher->time_to_sleep, philosopher))
-		announce_the_death_of(philosopher);
+	suspend_the_thread_until_n_useconds_has_elapsed_since(
+		philosopher->time_to_eat_and_sleep, &philosopher->last_meal);
 }
 
 /**
@@ -104,13 +101,12 @@ inline static void
 	)
 {
 	pthread_mutex_lock(philosopher->common);
-	if (*philosopher->simulation_is_running)
-		printf("%7u %3hhu is thinking\n",
-			elapsed_time_since(&philosopher->simulation_start) / 1000,
-			philosopher->identifer);
+	printf("%7u %3hhu is thinking\n",
+		elapsed_time_since(&philosopher->simulation_start) / 1000,
+		philosopher->identifer);
 	pthread_mutex_unlock(philosopher->common);
-	if (watch_the_time(philosopher->time_to_think, philosopher))
-		announce_the_death_of(philosopher);
+	suspend_the_thread_until_n_useconds_has_elapsed_since(
+		philosopher->time_to_eat_and_sleep_and_think, &philosopher->last_meal);
 }
 
 /**
@@ -132,18 +128,17 @@ void
 {
 	t_philosopher *const	philosopher = raw;
 
+	if (philosopher->someone_will_inevitably_die)
+	{
+		die(philosopher);
+		return (NULL);
+	}
 	pthread_mutex_lock(philosopher->common);
 	pthread_mutex_unlock(philosopher->common);
 	gettimeofday(&philosopher->simulation_start, NULL);
 	philosopher->last_meal = philosopher->simulation_start;
-	if (philosopher->forks[0] == philosopher->forks[1])
-	{
-		printf("      0   1 has taken a fork\n");
-		watch_the_time(philosopher->time_to_die, philosopher);
-		announce_the_death_of(philosopher);
-	}
 	pthread_mutex_lock(philosopher->common);
-	while (*philosopher->simulation_is_running)
+	while (*philosopher->at_least_1_philosopher_must_still_eat)
 	{
 		pthread_mutex_unlock(philosopher->common);
 		eat(philosopher);

@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 20:48:19 by jodufour          #+#    #+#              #
-#    Updated: 2024/10/31 23:28:38 by jodufour         ###   ########.fr        #
+#    Updated: 2024/11/02 21:25:03 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,8 @@ SRC := ${addsuffix .c, \
 	parse_the_arguments \
 	philosopher_routine \
 	prepare_the_simulation \
+	suspend_the_thread_until_n_useconds_has_elapsed_since \
 	wait_for_all_threads \
-	watch_the_time \
 }
 
 ######################################

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 23:50:35 by jodufour          #+#    #+#             */
-/*   Updated: 2024/10/31 23:31:21 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/02 22:32:25 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ void
 	)
 {
 	pthread_mutex_lock(&simulation->common);
-	while (simulation->is_running
-		&& at_least_1_philosopher_must_still_eat(
+	while (at_least_1_philosopher_must_still_eat(
 			simulation->philosophers,
 			arguments->number_of_philosophers,
 			arguments->number_of_times_each_philosopher_must_eat))
@@ -79,6 +78,6 @@ void
 		usleep(USLEEP_DURATION);
 		pthread_mutex_lock(&simulation->common);
 	}
-	simulation->is_running = false;
+	simulation->at_least_1_philosopher_must_still_eat = false;
 	pthread_mutex_unlock(&simulation->common);
 }

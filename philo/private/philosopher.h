@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:35:33 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/03 00:16:12 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:34:12 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ struct s_philosopher
 	texts when printing */
 	pthread_mutex_t	*shared;
 
-	bool			*at_least_1_philosopher_must_still_eat;
+	bool			*simulation_is_running;
 
 	/* In milliseconds */
 	uint32_t		timestamp;

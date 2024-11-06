@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:03:02 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/03 00:13:44 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:34:12 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void
 	pthread_mutex_unlock(philosopher->shared);
 	suspend_the_thread_for_n_useconds(philosopher->timestamp * 1000);
 	pthread_mutex_lock(philosopher->shared);
-	while (*philosopher->at_least_1_philosopher_must_still_eat)
+	while (*philosopher->simulation_is_running)
 	{
 		pthread_mutex_unlock(philosopher->shared);
 		eat(philosopher, time_to_eat);

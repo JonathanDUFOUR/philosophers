@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 02:39:42 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/02 23:04:05 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:34:23 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ bool
 		}
 		++i;
 	}
-	simulation->at_least_1_philosopher_must_still_eat = true;
+	simulation->is_running = true;
 	pthread_mutex_unlock(&simulation->shared);
 	return (false);
 }

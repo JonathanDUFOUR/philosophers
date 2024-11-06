@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:56:55 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/03 00:03:26 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:38:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ inline static void
 
 	pthread_mutex_init(&philosopher->meals, NULL);
 	philosopher->shared = &simulation->shared;
-	philosopher->at_least_1_philosopher_must_still_eat
-		= &simulation->at_least_1_philosopher_must_still_eat;
+	philosopher->simulation_is_running
+		= &simulation->is_running;
 	philosopher->timestamp
 		= !(n & 1) * ((arguments->number_of_philosophers & 1 && !n) + 1)
 		* arguments->time_to_eat;
@@ -167,8 +167,8 @@ bool
 		= arguments->number_of_philosophers == 1
 		|| arguments->time_to_die
 		<= arguments->time_to_eat + arguments->time_to_sleep + time_to_think;
+	simulation->is_running = false;
 	initialize_the_forks_and_the_philosophers(
 		simulation, arguments, time_to_think);
-	simulation->at_least_1_philosopher_must_still_eat = false;
 	return (false);
 }

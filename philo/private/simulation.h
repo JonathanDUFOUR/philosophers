@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 00:40:57 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/02 23:04:07 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:38:22 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ struct s_simulation
 	t_philosopher	*philosophers;
 	pthread_t		*threads;
 	bool			someone_will_inevitably_die;
-	bool			at_least_1_philosopher_must_still_eat;
+	bool			is_running;
 };
 
 #endif

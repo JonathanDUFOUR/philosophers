@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 23:50:35 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/02 23:04:05 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:36:18 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ inline static bool
 	return (false);
 }
 
-#define USLEEP_DURATION 4242 // in microseconds
+/* In microseconds */
+#define USLEEP_DURATION 4242
 
 /**
  * @brief Monitors the number of meals eaten by each philosopher,
@@ -78,6 +79,6 @@ void
 		usleep(USLEEP_DURATION);
 		pthread_mutex_lock(&simulation->shared);
 	}
-	simulation->at_least_1_philosopher_must_still_eat = false;
+	simulation->is_running = false;
 	pthread_mutex_unlock(&simulation->shared);
 }

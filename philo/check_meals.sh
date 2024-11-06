@@ -1,9 +1,9 @@
 #!/bin/sh
 
-number_of_philosophers=19
-time_to_die=610
-time_to_eat=200
-time_to_sleep=100
+number_of_philosophers=100
+time_to_die=601
+time_to_eat=300
+time_to_sleep=300
 number_of_times_each_philosopher_must_eat=42
 
 make philo

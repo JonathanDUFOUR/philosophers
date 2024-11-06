@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:56:55 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/05 15:38:38 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:50:33 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 #include <stdlib.h>
 
 /**
- * @brief Allocates memory for the philosophers and forks.
+ * @brief Allocates memory for the forks, the philosophers, and the thread ids.
  * 
  * @param simulation A reference to the simulation data
- *        to save the addresses of the allocations in.
+ *        to save the resulting addresses in.
  * 
- * @param number_of_philosophers The number of philosophers/forks to allocate.
+ * @param number_of_philosophers How many forks, philosophers, and tread ids
+ *        to allocate memory for.
  * 
  * @return `true` if `malloc()` fails, `false` otherwise.
  */

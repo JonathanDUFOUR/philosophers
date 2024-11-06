@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:32:10 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/02 23:04:05 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/06 20:30:40 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 #include <stdlib.h>
 
 /**
- * @brief Frees the memory allocated for the forks, philosophers, and threads.
+ * @brief Releases the resources allocated for the simulation, such as
+ *        the mutexes, and the allocated memory for the forks, philosophers,
+ *        and thread ids.
  * 
  * @param simulation A reference to the simulation data to clean.
  * 
- * @param n The number of forks and philosophers in the simulation.
+ * @param n How many forks, philosophers, and thread ids
+ *        the simulation contains.
  */
 void
 	clean_the_simulation(
@@ -34,5 +37,5 @@ void
 	}
 	free(simulation->forks);
 	free(simulation->philosophers);
-	free(simulation->threads);
+	free(simulation->thread_ids);
 }

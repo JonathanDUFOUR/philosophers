@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:40:18 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/02 23:27:15 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/06 20:12:06 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ suspend_the_thread_for_n_useconds(
 
 void
 wait_for_all_threads(
-	pthread_t *const threads,
+	pthread_t *const thread_ids,
 	uint8_t number_of_threads)
 __attribute__((nonnull));
 

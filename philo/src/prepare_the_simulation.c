@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:56:55 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/06 19:50:33 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/06 20:29:41 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,32 @@
 #include <stdlib.h>
 
 /**
- * @brief Allocates memory for the forks, the philosophers, and the thread ids.
+ * @brief Allocates memory for the forks, philosophers, and thread ids.
  * 
  * @param simulation A reference to the simulation data
  *        to save the resulting addresses in.
  * 
- * @param number_of_philosophers How many forks, philosophers, and tread ids
- *        to allocate memory for.
+ * @param n How many forks, philosophers, and tread ids to allocate memory for.
  * 
  * @return `true` if `malloc()` fails, `false` otherwise.
  */
 inline static bool
 	allocate(
 		t_simulation *const simulation,
-		uint8_t const number_of_philosophers
+		uint8_t const n
 	)
 {
-	simulation->forks = malloc(
-			number_of_philosophers * sizeof(*simulation->forks));
+	simulation->forks = malloc(n * sizeof(*simulation->forks));
 	if (simulation->forks == NULL)
 		return (true);
-	simulation->philosophers = malloc(
-			number_of_philosophers * sizeof(*simulation->philosophers));
+	simulation->philosophers = malloc(n * sizeof(*simulation->philosophers));
 	if (simulation->philosophers == NULL)
 	{
 		free(simulation->forks);
 		return (true);
 	}
-	simulation->threads = malloc(
-			number_of_philosophers * sizeof(*simulation->threads));
-	if (simulation->threads == NULL)
+	simulation->thread_ids = malloc(n * sizeof(*simulation->thread_ids));
+	if (simulation->thread_ids == NULL)
 	{
 		free(simulation->philosophers);
 		free(simulation->forks);

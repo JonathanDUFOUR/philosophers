@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 02:39:42 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/05 15:34:23 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/06 20:12:06 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ bool
 	while (i < number_of_philosophers)
 	{
 		if (pthread_create(
-				&simulation->threads[i],
+				&simulation->thread_ids[i],
 				NULL,
 				philosopher_routine,
 				&simulation->philosophers[i]))
 		{
 			pthread_mutex_unlock(&simulation->shared);
 			while (i)
-				pthread_join(simulation->threads[--i], NULL);
+				pthread_join(simulation->thread_ids[--i], NULL);
 			return (*status = ERR_PTHREAD_CREATE, true);
 		}
 		++i;

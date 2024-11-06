@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:32:10 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/06 20:30:40 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/07 00:27:28 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 #include <stdlib.h>
 
 /**
- * @brief Releases the resources allocated for the simulation, such as
- *        the mutexes, and the allocated memory for the forks, philosophers,
- *        and thread ids.
+ * @brief Releases the resources allocated for the simulation,
+ *        including mutexes and dynamic memory.
  * 
  * @param simulation A reference to the simulation data to clean.
  * 

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:48:51 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/09 00:58:49 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/09 16:35:07 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ int
 		return (EXIT_SUCCESS);
 	if (prepare_the_simulation(&simulation, &arguments, time_to_think))
 		return (error_message(ERR_MALLOC));
-	status = OK;
 	if (launch_the_simulation(&simulation, arguments.number_of_philosophers))
 		return (
 			clean_the_simulation(&simulation, arguments.number_of_philosophers),
@@ -121,7 +120,5 @@ int
 		monitor_the_simulation(&simulation, &arguments);
 	wait_for_threads(simulation.thread_ids, arguments.number_of_philosophers);
 	clean_the_simulation(&simulation, arguments.number_of_philosophers);
-	if (status != OK)
-		return (error_message(status));
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:35:33 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/05 15:34:12 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/08 23:59:14 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,11 @@ struct s_philosopher
 	/* In milliseconds */
 	uint32_t		timestamp;
 	/* In milliseconds */
-	uint16_t		time_to_die;
-	/* In milliseconds */
 	uint16_t		time_to_eat;
 	/* In milliseconds */
 	uint16_t		time_to_sleep;
 	/* In milliseconds */
 	uint16_t		time_to_think;
-
-	bool			someone_will_inevitably_die;
 
 	uint8_t			number_of_meals;
 	uint8_t			identifer;

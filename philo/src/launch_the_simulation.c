@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 02:39:42 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/06 20:12:06 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/09 01:00:17 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,12 @@
  * 
  * @param number_of_philosophers The number of threads to create.
  * 
- * @param status A reference to the status to set if a thread creation fails.
- * 
- * @return `true` if a thread creation fails, `false` otherwise.
+ * @return `true` if a `pthread_create()` fails, `false` otherwise.
  */
 bool
 	launch_the_simulation(
 		t_simulation *const simulation,
-		uint8_t const number_of_philosophers,
-		t_status *const status
+		uint8_t const number_of_philosophers
 	)
 {
 	uint8_t	i;
@@ -46,7 +43,7 @@ bool
 			pthread_mutex_unlock(&simulation->shared);
 			while (i)
 				pthread_join(simulation->thread_ids[--i], NULL);
-			return (*status = ERR_PTHREAD_CREATE, true);
+			return (true);
 		}
 		++i;
 	}

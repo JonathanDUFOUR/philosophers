@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:56:55 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/06 20:29:41 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/09 01:19:47 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,31 +60,31 @@ inline static bool
  * @param arguments A reference to the program arguments
  *        to initialize the philosopher with.
  * 
- * @param time_to_think How many microseconds the philosopher must think.
+ * @param time_to_think How many milliseconds
+ *        each philosopher must spend thinking.
  */
 inline static void
 	initialize_the_nth_philosopher(
 		t_simulation *const simulation,
 		uint8_t const n,
 		t_program_arguments const *const arguments,
-		__useconds_t const time_to_think
+		uint16_t const time_to_think
 	)
 {
 	t_philosopher *const	philosopher = &simulation->philosophers[n];
+	bool const				n_is_even = !(n & 1);
+	bool const				number_of_philosophers_is_odd
+		= arguments->number_of_philosophers & 1;
 
 	pthread_mutex_init(&philosopher->meals, NULL);
 	philosopher->shared = &simulation->shared;
-	philosopher->simulation_is_running
-		= &simulation->is_running;
+	philosopher->simulation_is_running = &simulation->is_running;
 	philosopher->timestamp
-		= !(n & 1) * ((arguments->number_of_philosophers & 1 && !n) + 1)
+		= n_is_even * ((number_of_philosophers_is_odd && !n) + 1)
 		* arguments->time_to_eat;
-	philosopher->time_to_die = arguments->time_to_die;
 	philosopher->time_to_eat = arguments->time_to_eat;
 	philosopher->time_to_sleep = arguments->time_to_sleep;
 	philosopher->time_to_think = time_to_think;
-	philosopher->someone_will_inevitably_die
-		= simulation->someone_will_inevitably_die;
 	philosopher->number_of_meals = 0;
 	philosopher->identifer = n + 1;
 }
@@ -98,13 +98,14 @@ inline static void
  * @param arguments A reference to the program arguments to use to initialize
  *        the simulation data.
  * 
- * @param time_to_think How many microseconds the philosophers must think.
+ * @param time_to_think How many milliseconds
+ *        each philosopher must spend thinking.
  */
 inline static void
 	initialize_the_forks_and_the_philosophers(
 		t_simulation *const simulation,
 		t_program_arguments const *const arguments,
-		__useconds_t const time_to_think
+		uint16_t const time_to_think
 	)
 {
 	uint8_t	i;
@@ -138,7 +139,8 @@ inline static void
  * @param arguments A reference to the program arguments to use to set up
  *        the simulation data.
  * 
- * @param status A reference to the status to set if an allocation fails.
+ * @param time_to_think How many milliseconds
+ *        each philosopher must spend thinking.
  * 
  * @return `true` if `malloc()` fails, `false` otherwise.
  */
@@ -146,24 +148,12 @@ bool
 	prepare_the_simulation(
 		t_simulation *const simulation,
 		t_program_arguments const *const arguments,
-		t_status *const status
+		uint16_t const time_to_think
 	)
 {
-	bool const			is_odd = arguments->number_of_philosophers & 1;
-	__useconds_t const	time_to_eat_again
-		= arguments->time_to_eat
-		+ arguments->time_to_eat * is_odd;
-	__useconds_t const	time_to_think
-		= (time_to_eat_again > arguments->time_to_sleep)
-		* (time_to_eat_again - arguments->time_to_sleep);
-
 	if (allocate(simulation, arguments->number_of_philosophers))
-		return (*status = ERR_MALLOC, true);
+		return (true);
 	pthread_mutex_init(&simulation->shared, NULL);
-	simulation->someone_will_inevitably_die
-		= arguments->number_of_philosophers == 1
-		|| arguments->time_to_die
-		<= arguments->time_to_eat + arguments->time_to_sleep + time_to_think;
 	simulation->is_running = false;
 	initialize_the_forks_and_the_philosophers(
 		simulation, arguments, time_to_think);

@@ -6,12 +6,13 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:48:51 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/06 20:12:06 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/09 00:58:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error_messages.h"
 #include "internal_functions.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -40,6 +41,59 @@ inline static int
 	return (EXIT_FAILURE);
 }
 
+/**
+ * @brief Calculates how many milliseconds each philosopher must spend thinking
+ *        to allow both neighbors time to eat.
+ * 
+ * @param arguments A reference to the program arguments to use to calculate
+ *        the time to think.
+ * 
+ * @return The calculated time to think in milliseconds.
+ */
+inline static uint16_t
+	calculate_the_time_to_think(
+		t_program_arguments const *const arguments
+	)
+{
+	bool const			is_odd = arguments->number_of_philosophers & 1;
+	__useconds_t const	time_to_eat_again
+		= arguments->time_to_eat
+		+ arguments->time_to_eat * is_odd;
+
+	return ((time_to_eat_again > arguments->time_to_sleep)
+		* (time_to_eat_again - arguments->time_to_sleep));
+}
+
+/**
+ * @brief Checks whether the given program arguments will inevitably lead
+ *        to a philosopher's death, and if so, suspend the execution for
+ *        the time before a philosopher dies, and finally announce the death
+ *        of every philosopher.
+ * 
+ * @param arguments A reference to the program arguments to check.
+ * @param time_to_think How many milliseconds
+ *        each philosopher must spend thinking.
+ * 
+ * @return `true` if a philosopher will inevitably die, `false` otherwise.
+ */
+inline static bool
+	death_was_inevitable(
+		t_program_arguments *const arguments,
+		uint16_t const time_to_think
+	)
+{
+	if (arguments->number_of_philosophers > 1
+		&& arguments->time_to_die
+		> arguments->time_to_eat + arguments->time_to_sleep + time_to_think)
+		return (false);
+	suspend_the_execution_for_n_useconds(arguments->time_to_die * 1000);
+	while (arguments->number_of_philosophers)
+		printf("%7u %3hhu died\n",
+			arguments->time_to_die,
+			arguments->number_of_philosophers--);
+	return (true);
+}
+
 int
 	main(
 		int const ac,
@@ -47,21 +101,25 @@ int
 	)
 {
 	t_program_arguments	arguments;
+	uint16_t			time_to_think;
 	t_simulation		simulation;
 	t_status			status;
 
-	if (parse_the_arguments(&arguments, ac, av, &status) || \
-		prepare_the_simulation(&simulation, &arguments, &status))
+	if (parse_the_arguments(&arguments, ac, av, &status))
 		return (error_message(status));
+	time_to_think = calculate_the_time_to_think(&arguments);
+	if (death_was_inevitable(&arguments, time_to_think))
+		return (EXIT_SUCCESS);
+	if (prepare_the_simulation(&simulation, &arguments, time_to_think))
+		return (error_message(ERR_MALLOC));
 	status = OK;
-	if (!launch_the_simulation(
-			&simulation, arguments.number_of_philosophers, &status))
-	{
-		if (ac == 6 && !simulation.someone_will_inevitably_die)
-			monitor_the_simulation(&simulation, &arguments);
-		wait_for_all_threads(
-			simulation.thread_ids, arguments.number_of_philosophers);
-	}
+	if (launch_the_simulation(&simulation, arguments.number_of_philosophers))
+		return (
+			clean_the_simulation(&simulation, arguments.number_of_philosophers),
+			error_message(ERR_PTHREAD_CREATE));
+	if (ac == 6)
+		monitor_the_simulation(&simulation, &arguments);
+	wait_for_threads(simulation.thread_ids, arguments.number_of_philosophers);
 	clean_the_simulation(&simulation, arguments.number_of_philosophers);
 	if (status != OK)
 		return (error_message(status));

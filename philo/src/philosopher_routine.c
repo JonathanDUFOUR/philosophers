@@ -6,30 +6,12 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:03:02 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/05 15:34:12 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/09 01:23:16 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal_functions.h"
 #include <stdio.h>
-
-/**
- * @brief Make a given philosopher wait for its death, and then announce it.
- * 
- * @param philosopher A reference to the philosopher that will die.
- */
-inline static void
-	die(
-		t_philosopher *const philosopher
-	)
-{
-	suspend_the_thread_for_n_useconds(philosopher->time_to_die * 1000);
-	pthread_mutex_lock(philosopher->shared);
-	printf("%7u %3hhu died\n",
-		philosopher->time_to_die,
-		philosopher->identifer);
-	pthread_mutex_unlock(philosopher->shared);
-}
 
 /**
  * @brief Makes a given philosopher take the two forks on its sides,
@@ -59,7 +41,7 @@ inline static void
 		philosopher->timestamp,
 		philosopher->identifer);
 	pthread_mutex_unlock(philosopher->shared);
-	suspend_the_thread_for_n_useconds(time_to_eat);
+	suspend_the_execution_for_n_useconds(time_to_eat);
 	philosopher->timestamp += philosopher->time_to_eat;
 	pthread_mutex_unlock(philosopher->forks[0]);
 	pthread_mutex_unlock(philosopher->forks[1]);
@@ -86,7 +68,7 @@ inline static void
 		philosopher->timestamp,
 		philosopher->identifer);
 	pthread_mutex_unlock(philosopher->shared);
-	suspend_the_thread_for_n_useconds(time_to_sleep);
+	suspend_the_execution_for_n_useconds(time_to_sleep);
 	philosopher->timestamp += philosopher->time_to_sleep;
 }
 
@@ -108,7 +90,7 @@ inline static void
 		philosopher->timestamp,
 		philosopher->identifer);
 	pthread_mutex_unlock(philosopher->shared);
-	suspend_the_thread_for_n_useconds(time_to_think);
+	suspend_the_execution_for_n_useconds(time_to_think);
 	philosopher->timestamp += philosopher->time_to_think;
 }
 
@@ -134,14 +116,10 @@ void
 	__useconds_t const		time_to_sleep = philosopher->time_to_sleep * 1000;
 	__useconds_t const		time_to_think = philosopher->time_to_think * 1000;
 
-	if (philosopher->someone_will_inevitably_die)
-	{
-		die(philosopher);
-		return (NULL);
-	}
 	pthread_mutex_lock(philosopher->shared);
 	pthread_mutex_unlock(philosopher->shared);
-	suspend_the_thread_for_n_useconds(philosopher->timestamp * 1000);
+	if (philosopher->timestamp)
+		suspend_the_execution_for_n_useconds(philosopher->timestamp * 1000);
 	pthread_mutex_lock(philosopher->shared);
 	while (*philosopher->simulation_is_running)
 	{

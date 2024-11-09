@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait_for_all_threads.c                             :+:      :+:    :+:   */
+/*   wait_for_threads.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:36:53 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/06 20:12:06 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/09 00:59:13 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdint.h>
 
 /**
- * @brief Waits for all the given threads to finish.
+ * @brief Waits for given threads to finish.
  * 
  * @param threads An array of threads to wait for. It is assumed
  *        that the threads are all joinable.
@@ -22,7 +22,7 @@
  * @param number_of_threads How many elements does `threads` contain.
  */
 void
-	wait_for_all_threads(
+	wait_for_threads(
 		pthread_t *const thread_ids,
 		uint8_t number_of_threads
 	)

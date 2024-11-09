@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:40:18 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/06 20:12:06 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/09 00:58:48 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,10 @@ clean_the_simulation(
 	uint8_t number_of_philosophers)
 __attribute__((nonnull));
 
-__useconds_t
-elapsed_time_since(
-	struct timeval const *const earlier)
-__attribute__((nonnull));
-
 bool
 launch_the_simulation(
 	t_simulation *const simulation,
-	uint8_t const number_of_philosophers,
-	t_status *const status)
+	uint8_t const number_of_philosophers)
 __attribute__((nonnull));
 
 void
@@ -57,15 +51,15 @@ bool
 prepare_the_simulation(
 	t_simulation *const simulation,
 	t_program_arguments const *const program_arguments,
-	t_status *const status)
+	uint16_t const time_to_think)
 __attribute__((nonnull));
 
 void
-suspend_the_thread_for_n_useconds(
+suspend_the_execution_for_n_useconds(
 	__useconds_t const duration);
 
 void
-wait_for_all_threads(
+wait_for_threads(
 	pthread_t *const thread_ids,
 	uint8_t number_of_threads)
 __attribute__((nonnull));

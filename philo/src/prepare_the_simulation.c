@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:56:55 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/09 01:19:47 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/09 02:40:04 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,8 @@ bool
 	if (allocate(simulation, arguments->number_of_philosophers))
 		return (true);
 	pthread_mutex_init(&simulation->shared, NULL);
-	simulation->is_running = false;
 	initialize_the_forks_and_the_philosophers(
 		simulation, arguments, time_to_think);
+	simulation->is_running = false;
 	return (false);
 }

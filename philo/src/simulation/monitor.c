@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitor_the_simulation.c                           :+:      :+:    :+:   */
+/*   simulation_monitor.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 23:50:35 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/05 15:36:18 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/16 23:06:47 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ inline static bool
  *        to monitor the simulation.
  */
 void
-	monitor_the_simulation(
+	simulation_monitor(
 		t_simulation *const simulation,
 		t_program_arguments const *const arguments
 	)

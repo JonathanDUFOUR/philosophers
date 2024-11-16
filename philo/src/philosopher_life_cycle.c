@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher_routine.c                              :+:      :+:    :+:   */
+/*   philosopher_life_cycle.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:03:02 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/09 01:23:16 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/16 23:31:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal_functions.h"
+#include "philosopher.h"
 #include <stdio.h>
 
 /**
@@ -41,7 +42,7 @@ inline static void
 		philosopher->timestamp,
 		philosopher->identifer);
 	pthread_mutex_unlock(philosopher->shared);
-	suspend_the_execution_for_n_useconds(time_to_eat);
+	suspend_execution_for_n_useconds(time_to_eat);
 	philosopher->timestamp += philosopher->time_to_eat;
 	pthread_mutex_unlock(philosopher->forks[0]);
 	pthread_mutex_unlock(philosopher->forks[1]);
@@ -68,7 +69,7 @@ inline static void
 		philosopher->timestamp,
 		philosopher->identifer);
 	pthread_mutex_unlock(philosopher->shared);
-	suspend_the_execution_for_n_useconds(time_to_sleep);
+	suspend_execution_for_n_useconds(time_to_sleep);
 	philosopher->timestamp += philosopher->time_to_sleep;
 }
 
@@ -90,7 +91,7 @@ inline static void
 		philosopher->timestamp,
 		philosopher->identifer);
 	pthread_mutex_unlock(philosopher->shared);
-	suspend_the_execution_for_n_useconds(time_to_think);
+	suspend_execution_for_n_useconds(time_to_think);
 	philosopher->timestamp += philosopher->time_to_think;
 }
 
@@ -107,7 +108,7 @@ inline static void
  * @return Always `NULL`.
  */
 void
-	*philosopher_routine(
+	*philosopher_life_cycle(
 		void *const raw
 	)
 {
@@ -119,7 +120,7 @@ void
 	pthread_mutex_lock(philosopher->shared);
 	pthread_mutex_unlock(philosopher->shared);
 	if (philosopher->timestamp)
-		suspend_the_execution_for_n_useconds(philosopher->timestamp * 1000);
+		suspend_execution_for_n_useconds(philosopher->timestamp * 1000);
 	pthread_mutex_lock(philosopher->shared);
 	while (*philosopher->simulation_is_running)
 	{

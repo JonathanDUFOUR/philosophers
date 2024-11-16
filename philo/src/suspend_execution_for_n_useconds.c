@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   suspend_the_execution_for_n_useconds.c             :+:      :+:    :+:   */
+/*   suspend_execution_for_n_useconds.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:40:22 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/08 23:41:04 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/16 23:32:04 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal_functions.h"
 #include <sys/time.h>
 #include <unistd.h>
 
@@ -23,7 +22,7 @@
  * @param duration How many microseconds to suspend the execution.
  */
 void
-	suspend_the_execution_for_n_useconds(
+	suspend_execution_for_n_useconds(
 		__useconds_t const duration
 	)
 {

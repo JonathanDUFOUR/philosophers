@@ -6,17 +6,16 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:35:33 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/08 23:59:14 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/16 23:22:51 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
 
-# include "program_arguments.h"
-# include <bits/types/struct_timeval.h>
 # include <pthread.h>
 # include <stdbool.h>
+# include <stdint.h>
 
 typedef struct s_philosopher	t_philosopher;
 
@@ -61,5 +60,10 @@ The philosopher will only remember that:
 - they shall end eating   after 300 milliseconds since their last meal
 - they shall end sleeping after 500 milliseconds since their last meal
 - they shall end thinking after 600 milliseconds after their last meal */
+
+void
+*philosopher_life_cycle(
+	void *const raw)
+__attribute__((nonnull));
 
 #endif

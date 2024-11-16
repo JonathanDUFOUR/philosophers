@@ -6,12 +6,13 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:48:51 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/09 16:35:07 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/16 23:31:07 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error_messages.h"
 #include "internal_functions.h"
+#include "simulation.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -86,7 +87,7 @@ inline static bool
 		&& arguments->time_to_die
 		> arguments->time_to_eat + arguments->time_to_sleep + time_to_think)
 		return (false);
-	suspend_the_execution_for_n_useconds(arguments->time_to_die * 1000);
+	suspend_execution_for_n_useconds(arguments->time_to_die * 1000);
 	while (arguments->number_of_philosophers)
 		printf("%7u %3hhu died\n",
 			arguments->time_to_die,
@@ -105,20 +106,20 @@ int
 	t_simulation		simulation;
 	t_status			status;
 
-	if (parse_the_arguments(&arguments, ac, av, &status))
+	if (parse_arguments(&arguments, ac, av, &status))
 		return (error_message(status));
 	time_to_think = calculate_the_time_to_think(&arguments);
 	if (death_was_inevitable(&arguments, time_to_think))
 		return (EXIT_SUCCESS);
-	if (prepare_the_simulation(&simulation, &arguments, time_to_think))
+	if (simulation_setup(&simulation, &arguments, time_to_think))
 		return (error_message(ERR_MALLOC));
-	if (launch_the_simulation(&simulation, arguments.number_of_philosophers))
+	if (simulation_launch(&simulation, arguments.number_of_philosophers))
 		return (
-			clean_the_simulation(&simulation, arguments.number_of_philosophers),
+			simulation_cleanup(&simulation, arguments.number_of_philosophers),
 			error_message(ERR_PTHREAD_CREATE));
 	if (ac == 6)
-		monitor_the_simulation(&simulation, &arguments);
+		simulation_monitor(&simulation, &arguments);
 	wait_for_threads(simulation.thread_ids, arguments.number_of_philosophers);
-	clean_the_simulation(&simulation, arguments.number_of_philosophers);
+	simulation_cleanup(&simulation, arguments.number_of_philosophers);
 	return (EXIT_SUCCESS);
 }

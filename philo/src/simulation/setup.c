@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prepare_the_simulation.c                           :+:      :+:    :+:   */
+/*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 23:56:55 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/09 02:40:04 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/16 23:29:05 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "simulation.h"
-#include "status.h"
 #include <stdlib.h>
 
 /**
@@ -42,8 +41,8 @@ inline static bool
 	simulation->thread_ids = malloc(n * sizeof(*simulation->thread_ids));
 	if (simulation->thread_ids == NULL)
 	{
-		free(simulation->philosophers);
 		free(simulation->forks);
+		free(simulation->philosophers);
 		return (true);
 	}
 	return (false);
@@ -72,16 +71,20 @@ inline static void
 	)
 {
 	t_philosopher *const	philosopher = &simulation->philosophers[n];
-	bool const				n_is_even = !(n & 1);
+	bool const				n_is_even = (n & 1) == 0;
 	bool const				number_of_philosophers_is_odd
-		= arguments->number_of_philosophers & 1;
+		= (arguments->number_of_philosophers & 1) == 1;
 
 	pthread_mutex_init(&philosopher->meals, NULL);
 	philosopher->shared = &simulation->shared;
 	philosopher->simulation_is_running = &simulation->is_running;
-	philosopher->timestamp
-		= n_is_even * ((number_of_philosophers_is_odd && !n) + 1)
-		* arguments->time_to_eat;
+	philosopher->timestamp = 0;
+	if (n_is_even)
+	{
+		philosopher->timestamp += arguments->time_to_eat;
+		if (n == 0 && number_of_philosophers_is_odd)
+			philosopher->timestamp += arguments->time_to_eat;
+	}
 	philosopher->time_to_eat = arguments->time_to_eat;
 	philosopher->time_to_sleep = arguments->time_to_sleep;
 	philosopher->time_to_think = time_to_think;
@@ -145,7 +148,7 @@ inline static void
  * @return `true` if `malloc()` fails, `false` otherwise.
  */
 bool
-	prepare_the_simulation(
+	simulation_setup(
 		t_simulation *const simulation,
 		t_program_arguments const *const arguments,
 		uint16_t const time_to_think

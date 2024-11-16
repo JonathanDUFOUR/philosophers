@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   launch_the_simulation.c                            :+:      :+:    :+:   */
+/*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 02:39:42 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/09 01:00:17 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/16 23:21:45 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal_functions.h"
+#include "simulation.h"
 
 /**
  * @brief Creates one thread per philosopher, with each running the
@@ -20,10 +20,10 @@
  * 
  * @param number_of_philosophers The number of threads to create.
  * 
- * @return `true` if a `pthread_create()` fails, `false` otherwise.
+ * @return `true` if `pthread_create()` fails, `false` otherwise.
  */
 bool
-	launch_the_simulation(
+	simulation_launch(
 		t_simulation *const simulation,
 		uint8_t const number_of_philosophers
 	)
@@ -37,7 +37,7 @@ bool
 		if (pthread_create(
 				&simulation->thread_ids[i],
 				NULL,
-				philosopher_routine,
+				philosopher_life_cycle,
 				&simulation->philosophers[i]))
 		{
 			pthread_mutex_unlock(&simulation->shared);

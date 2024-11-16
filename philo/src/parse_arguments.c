@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_the_arguments.c                              :+:      :+:    :+:   */
+/*   parse_arguments.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:37:38 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/03 00:16:46 by jodufour         ###   ########.fr       */
+/*   Updated: 2024/11/16 23:31:28 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ inline static bool
 {
 	uint8_t	n;
 
-	if (!*s)
+	if (*s == 0)
 		return (*status = ERR_PARSE_U8_EMPTY_STRING, true);
 	while (*s == '0')
 		++s;
-	if (!*s)
+	if (*s == 0)
 		return (*n_addr = 0, false);
 	if (!is_digit(*s))
 		return (*status = ERR_PARSE_U8_NON_DIGIT, true);
@@ -90,11 +90,11 @@ inline static bool
 {
 	uint16_t	n;
 
-	if (!*s)
+	if (*s == 0)
 		return (*status = ERR_PARSE_U16_EMPTY_STRING, true);
 	while (*s == '0')
 		++s;
-	if (!*s)
+	if (*s == 0)
 		return (*n_addr = 0, false);
 	if (!is_digit(*s))
 		return (*status = ERR_PARSE_U16_NON_DIGIT, true);
@@ -128,7 +128,7 @@ inline static bool
  * @return `true` if an argument is invalid, `false` otherwise.
  */
 bool
-	parse_the_arguments(
+	parse_arguments(
 		t_program_arguments *const arguments,
 		int const ac,
 		char const *const *const av,
@@ -147,9 +147,9 @@ bool
 				status
 			)))
 		return (true);
-	if (!arguments->number_of_philosophers)
+	if (arguments->number_of_philosophers == 0)
 		return (*status = ERR_NUMBER_OF_PHILOSOPHERS, true);
-	if (ac == 6 && !arguments->number_of_times_each_philosopher_must_eat)
+	if (ac == 6 && arguments->number_of_times_each_philosopher_must_eat == 0)
 		return (*status = ERR_NUMBER_OF_TIMES_EACH_PHILOSOPHER_MUST_EAT, true);
 	return (false);
 }

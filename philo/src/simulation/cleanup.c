@@ -16,9 +16,9 @@
 /**
  * @brief Releases the resources allocated for the simulation,
  *        including mutexes and dynamic memory.
- * 
+ *
  * @param simulation A reference to the simulation data to clean.
- * 
+ *
  * @param n How many forks, philosophers, and thread ids
  *        the simulation contains.
  */

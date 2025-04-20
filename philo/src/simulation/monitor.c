@@ -16,14 +16,14 @@
 /**
  * @brief Checks whether at least 1 philosopher has not reached the specified
  *        number of times they must eat yet.
- * 
+ *
  * @param philosophers The array of philosophers to check.
- * 
+ *
  * @param number_of_philosophers The number of philosophers in the array.
- * 
+ *
  * @param number_of_times_each_philosopher_must_eat The number of times each
  *        philosopher must eat.
- * 
+ *
  * @return `true` if at least 1 philosopher has not reached the specified number
  *         of times they must eat yet, `false` otherwise.
  */
@@ -57,9 +57,9 @@ inline static bool
  * @brief Monitors the number of meals eaten by each philosopher,
  *        and stops the simulation when every philosopher has eaten
  *        at least the specified number of times.
- * 
+ *
  * @param simulation A reference to the simulation data to use to monitor it.
- * 
+ *
  * @param arguments A reference to the program arguments to use
  *        to monitor the simulation.
  */

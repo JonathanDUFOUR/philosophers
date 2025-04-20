@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:03:02 by jodufour          #+#    #+#             */
-/*   Updated: 2024/11/16 23:31:49 by jodufour         ###   ########.fr       */
+/*   Updated: 2025/04/21 01:14:21 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
  * @brief Makes a given philosopher take the two forks on its sides,
  *        announcing it for eack fork, then eat, announcing it,
  *        and finally put the two forks back on the table.
- * 
+ *
  * @param philosopher A reference to the philosopher that will take
  *        the forks, eat, and put the forks back on the table.
- * 
- * @param time_to_eat How many microseconds the philosopher must eat.
+ *
+ * @param time_to_eat How many microseconds
+ *        the philosopher must spend eating.
  */
 inline static void
 	eat(
@@ -53,10 +54,11 @@ inline static void
 
 /**
  * @brief Makes a given philosopher sleep, announcing it.
- * 
+ *
  * @param philosopher A reference to the philosopher that will sleep.
- * 
- * @param time_to_sleep How many microseconds the philosopher must sleep.
+ *
+ * @param time_to_sleep How many microseconds
+ *        the philosopher must spend sleeping.
  */
 inline static void
 	sleep(
@@ -75,10 +77,11 @@ inline static void
 
 /**
  * @brief Makes a given philosopher think, announcing it.
- * 
+ *
  * @param philosopher A reference to the philosopher that will think.
- * 
- * @param time_to_think How many microseconds the philosopher must think.
+ *
+ * @param time_to_think How many microseconds
+ *        the philosopher must spend thinking.
  */
 inline static void
 	think(
@@ -102,13 +105,13 @@ inline static void
  *        - put the two forks back on the table
  *        - sleep
  *        - think
- * 
+ *
  * @param raw A reference to the philosopher that will execute its life cycle.
- * 
+ *
  * @return Always `NULL`.
  */
-void
-	*philosopher_life_cycle(
+void *
+	philosopher_life_cycle(
 		void *const raw
 	)
 {

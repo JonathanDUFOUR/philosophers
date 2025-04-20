@@ -29,13 +29,13 @@ inline static bool
  * @brief Parses a 8-bits unsigned integer from a string,
  *        and stores it in a given variable.
  *        Leading whitespaces and signs are not supported.
- * 
+ *
  * @param s The string to parse.
- * 
+ *
  * @param n_addr A reference to the variable to store the parsed value in.
- * 
+ *
  * @param status A reference to the status to set if the parsing fails.
- * 
+ *
  * @return `true` if the parsing fails, `false` otherwise.
  */
 inline static bool
@@ -72,13 +72,13 @@ inline static bool
  * @brief Parses a 16-bits unsigned integer from a string,
  *        and stores it in a given variable.
  *        Leading whitespaces and signs are not supported.
- * 
+ *
  * @param s The string to parse.
- * 
+ *
  * @param n_addr A reference to the variable to store the parsed value in.
- * 
+ *
  * @param status A reference to the status to set if the parsing fails.
- * 
+ *
  * @return `true` if the parsing fails, `false` otherwise.
  */
 inline static bool
@@ -115,16 +115,16 @@ inline static bool
  * @brief Checks that the arguments passed to the program are valid,
  *        and if so, parses them and save their values in a given structure.
  *        If the arguments are invalid, sets the given status accordingly.
- * 
+ *
  * @param arguments A reference to the structure where to store the arguments
  *        once parsed.
- * 
+ *
  * @param ac The number of arguments passed to the program.
- * 
+ *
  * @param av The arguments passed to the program.
- * 
+ *
  * @param status A reference to the status to set if an argument is invalid.
- * 
+ *
  * @return `true` if an argument is invalid, `false` otherwise.
  */
 bool

@@ -15,12 +15,12 @@
 
 /**
  * @brief Allocates memory for the forks, philosophers, and thread ids.
- * 
+ *
  * @param simulation A reference to the simulation data
  *        to save the resulting addresses in.
- * 
+ *
  * @param n How many forks, philosophers, and tread ids to allocate memory for.
- * 
+ *
  * @return `true` if `malloc()` fails, `false` otherwise.
  */
 inline static bool
@@ -50,15 +50,15 @@ inline static bool
 
 /**
  * @brief Initializes the philosopher at a given index.
- * 
+ *
  * @param simulation A reference to the simulation data
  *        from which to initialize the philosopher.
- * 
+ *
  * @param n The index of the philosopher to initialize.
- * 
+ *
  * @param arguments A reference to the program arguments
  *        to initialize the philosopher with.
- * 
+ *
  * @param time_to_think How many milliseconds
  *        each philosopher must spend thinking.
  */
@@ -95,12 +95,12 @@ inline static void
 /**
  * @brief Initializes the array of forks and the array of philosophers
  *        in a given simulation data.
- * 
+ *
  * @param simulation A reference to the simulation data to initialize.
- * 
+ *
  * @param arguments A reference to the program arguments to use to initialize
  *        the simulation data.
- * 
+ *
  * @param time_to_think How many milliseconds
  *        each philosopher must spend thinking.
  */
@@ -136,15 +136,15 @@ inline static void
 /**
  * @brief Sets up the given simulation data by allocating memory
  *        for the philosophers and forks, and initializing each item.
- * 
+ *
  * @param simulation A reference to the simulation data to set up.
- * 
+ *
  * @param arguments A reference to the program arguments to use to set up
  *        the simulation data.
- * 
+ *
  * @param time_to_think How many milliseconds
  *        each philosopher must spend thinking.
- * 
+ *
  * @return `true` if `malloc()` fails, `false` otherwise.
  */
 bool

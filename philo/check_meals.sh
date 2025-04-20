@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -eu
 
 number_of_philosophers=100
 time_to_die=601

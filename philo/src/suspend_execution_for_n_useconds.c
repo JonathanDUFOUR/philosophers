@@ -18,7 +18,7 @@
 
 /**
  * @brief Suspends the execution for a given duration.
- * 
+ *
  * @param duration How many microseconds to suspend the execution.
  */
 void

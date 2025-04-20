@@ -15,11 +15,11 @@
 /**
  * @brief Creates one thread per philosopher, with each running the
  *        philosopher's life cycle.
- * 
+ *
  * @param simulation A reference to the simulation data to use to launch it.
- * 
+ *
  * @param number_of_philosophers The number of threads to create.
- * 
+ *
  * @return `true` if `pthread_create()` fails, `false` otherwise.
  */
 bool
